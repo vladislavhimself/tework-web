@@ -499,6 +499,61 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
 @media (max-width:560px){.btns .btn{width:100%;white-space:normal;text-align:center}}
 /* наклонная лента не должна давать прокрутку вбок */
 .band{overflow:hidden;padding-block:clamp(18px,3vw,40px)}
+/* ===== v2: проекты шире, отзывы заказчиков, поле в заявке, телефон ===== */
+.case--wide{grid-column:span 2;flex-direction:row;align-items:stretch;padding:12px}
+.case--wide .case__img{flex:0 0 46%;aspect-ratio:auto;min-height:300px}
+.case--wide .case__body{justify-content:center;padding:14px 16px}
+.case--wide .case__t{font-size:clamp(1.8rem,1.3rem + 1.6vw,2.7rem)}
+.picker__free{display:grid;gap:.6rem}
+.picker__in{width:100%;background:color-mix(in srgb,var(--ink) 5%,transparent);border:1px solid var(--line-strong);border-radius:999px;color:var(--ink);font:inherit;font-size:.95rem;padding:.75em 1.1em;outline:0;transition:border-color 160ms ease}
+.picker__in::placeholder{color:var(--ink-mute)}
+.picker__in:focus{border-color:var(--accent)}
+.reviews--workers .review blockquote{font-size:.92rem}
+/* ===== телефон: плотнее, крупнее кнопки, порядок блоков ===== */
+@media (max-width:980px){.case--wide{grid-column:1 / -1}}
+@media (max-width:860px){
+  :root{--sec-pad:clamp(56px,10vw,80px)}
+  .hero--split .hero__in{padding-top:88px}
+  .hero__title{font-size:clamp(3rem, 13.5vw, 4.4rem)}
+  .hero .lead{font-size:1rem;margin-top:1.1rem}
+  .hero__side{gap:12px}
+  .brandmark{padding:12px}
+  .brandmark__svg{width:26%;margin:4px 0 2px}
+  .hero .fcard{padding:10px 12px}
+  .hero .fcard__big{font-size:1.5rem}
+  .band{padding-block:14px}
+  .marquee__track > *{font-size:1rem}
+  .brands__list{gap:.3rem 1.2rem}
+  .brands__list li{font-size:1.35rem}
+  .stats{margin-top:32px;row-gap:22px}
+  .stat__num{font-size:2.2rem}
+  .stat__cap{font-size:.82rem}
+  .bento{gap:10px}
+  .card{padding:18px}
+  .roles li{font-size:.98rem}
+  .step{padding:1.1rem 0}
+  .step__n{font-size:1.5rem}
+  .cases{gap:10px}
+  .case{padding:10px 10px 16px}
+  .case__img{aspect-ratio:16/11}
+  .case--wide{flex-direction:column}
+  .case--wide .case__img{flex:none;aspect-ratio:16/11;min-height:0}
+  .case--text ul{gap:.5rem}
+  .reviews{gap:10px}
+  .review{padding:18px}
+  .review blockquote{font-size:.95rem}
+  .jobs__rate{font-size:2rem}
+  .faq .sec__head{margin-bottom:24px}
+  .picker{padding:18px}
+  .opts{gap:.4rem}
+  .opt span{padding:.55em .9em;font-size:.88rem}
+  .contactline{margin-top:1.2rem}
+  .ftr__word{font-size:22vw}
+}
+@media (max-width:420px){
+  .cases{grid-template-columns:1fr}
+  .hero__title{font-size:clamp(2.7rem, 13vw, 3.4rem)}
+}
 /*/SITE*/
 </style>
 </head>
@@ -516,7 +571,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="#top" aria-label="TeWork Agency, наверх"><svg viewBox="-22 0 214 222" aria-hidden="true"><circle cx="-2" cy="62" r="17" fill="#fc7f6b"/><rect x="10" y="100" width="22" height="120" fill="#f6bccb"/><polygon points="32,96 54,104 54,220 32,220" fill="#0a509a"/><rect x="58" y="58" width="24" height="162" fill="#f6bccb"/><polygon points="82,52 110,62 110,220 82,220" fill="#0a509a"/><rect x="114" y="14" width="26" height="206" fill="#f6bccb"/><polygon points="140,22 190,34 190,220 140,220" fill="#0a509a"/></svg>TEWORK</a>
     <nav class="hdr__nav" aria-label="Разделы">
-      <a href="#personal">Персонал</a><a href="#kak">Как работаем</a><a href="#proekty">Проекты</a><a href="#rabota">Работа у нас</a><a href="#voprosy">Вопросы</a>
+      <a href="#personal">Персонал</a><a href="#kak">Как работаем</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a>
     </nav>
     <a class="btn btn--primary btn--sm" href="#zayavka">Подобрать персонал</a>
   </div>
@@ -535,8 +590,8 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
       <div class="hero__side">
         <div class="brandmark" aria-hidden="true">
           <svg class="brandmark__svg" viewBox="-22 0 214 222"><circle class="dot" cx="-2" cy="62" r="17" fill="#fc7f6b"/><rect class="bar" style="--i:0" x="10" y="100" width="22" height="120" fill="#f6bccb"/><polygon class="bar" style="--i:1" points="32,96 54,104 54,220 32,220" fill="#0a509a"/><rect class="bar" style="--i:2" x="58" y="58" width="24" height="162" fill="#f6bccb"/><polygon class="bar" style="--i:3" points="82,52 110,62 110,220 82,220" fill="#0a509a"/><rect class="bar" style="--i:4" x="114" y="14" width="26" height="206" fill="#f6bccb"/><polygon class="bar" style="--i:5" points="140,22 190,34 190,220 140,220" fill="#0a509a"/></svg>
-          <div class="fcard fcard--a" style="--i:0"><div class="fcard__big nums">2 091</div><p class="fcard__cap">человек в нашем канале вакансий</p></div>
-          <div class="fcard fcard--b" style="--i:1"><div class="fcard__big nums">82</div><p class="fcard__cap">отзыва о работе с нами</p></div>
+          <div class="fcard fcard--a" style="--i:0"><div class="fcard__big nums">100+</div><p class="fcard__cap">проектов с 2024 года</p></div>
+          <div class="fcard fcard--b" style="--i:1"><div class="fcard__big nums">2 091</div><p class="fcard__cap">человек в базе исполнителей</p></div>
         </div>
         <a class="btn btn--primary hero__cta" href="#zayavka">Подобрать персонал <svg class="btn__arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
@@ -557,14 +612,14 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
       <div class="brands" data-reveal>
         <span class="chip">Нам доверяют</span>
         <ul class="brands__list">
-          <li>Сбер</li><li>Cloud.ru</li><li>Яндекс Плюс</li><li>PepsiCo</li><li>МТС Live</li><li>FITmost</li><li>Twinby</li><li>Lumos Concerts</li><li>SQ Clinic</li>
+          <li>Сбер</li><li>Cloud.ru</li><li>Летуаль</li><li>Rostic’s</li><li>DDX Fitness</li><li>FITmost</li><li>PepsiCo</li><li>МТС Live</li><li>Twinby</li><li>Lumos Concerts</li><li>SQ Clinic</li>
         </ul>
       </div>
       <ul class="stats nums" data-reveal>
         <li class="stat"><div class="stat__num">7</div><p class="stat__cap">городов: Москва, Санкт-Петербург, Сочи, Казань, Самара, Калининград, Тверь</p></li>
         <li class="stat"><div class="stat__num">14</div><p class="stat__cap">ролей: от хостес до координатора площадки</p></li>
         <li class="stat"><div class="stat__num">1–2 дня</div><p class="stat__cap">закрываем срочную заявку</p></li>
-        <li class="stat"><div class="stat__num">2024</div><p class="stat__cap">с этого года собираем команды на мероприятия</p></li>
+        <li class="stat"><div class="stat__num">100+</div><p class="stat__cap">проектов с 2024 года: от промо в школах до премий Сбера</p></li>
       </ul>
     </div>
   </section>
@@ -597,7 +652,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
       <div class="sec__head"><span class="chip">Как работаем</span><h2 class="h2">От заявки до <em class="hl">площадки</em></h2><p class="lead">Вам не нужно искать людей и следить за ними на мероприятии. Это наша работа.</p></div>
       <ol class="steps">
         <li class="step" data-reveal style="--i:0"><span class="step__n nums">01</span><h3 class="step__t">Вы рассказываете о мероприятии</h3><p class="step__d">Город, дата, сколько людей и в каких ролях. Хватит сообщения в мессенджере.</p></li>
-        <li class="step" data-reveal style="--i:1"><span class="step__n nums">02</span><h3 class="step__t">Подбираем людей</h3><p class="step__d">Из постоянной базы, с опытом работы на мероприятиях. Срочную заявку закрываем за 1–2 дня.</p><span class="tag">1–2 дня</span></li>
+        <li class="step" data-reveal style="--i:1"><span class="step__n nums">02</span><h3 class="step__t">Подбираем людей и показываем вам</h3><p class="step__d">Из постоянной базы, с опытом работы на мероприятиях. Присылаем презентацию с кандидатами: фото и опыт, вы выбираете. Срочную заявку закрываем за 1–2 дня.</p><span class="tag">1–2 дня</span></li>
         <li class="step" data-reveal style="--i:2"><span class="step__n nums">03</span><h3 class="step__t">Заключаем договор</h3><p class="step__d">Работаем по договору. Условия обсуждаем до мероприятия.</p><span class="tag">договор</span></li>
         <li class="step" data-reveal style="--i:3"><span class="step__n nums">04</span><h3 class="step__t">Координируем на площадке</h3><p class="step__d">Супервайзер ведёт команду: ребята работают слаженно и знают, что делать.</p></li>
         <li class="step" data-reveal style="--i:4"><span class="step__n nums">05</span><h3 class="step__t">Находим замену</h3><p class="step__d">Если кто-то не вышел на смену, ставим другого человека из базы.</p></li>
@@ -605,44 +660,71 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
     </div>
   </section>
 
-  <!-- ПРОЕКТЫ -->
+
+
+  <!-- ПРОЕКТЫ: фото от агентства (оригиналы), подписи — из описаний Андрея -->
   <section class="sec" id="proekty" aria-label="Проекты">
     <div class="wrap">
-      <div class="sec__head"><span class="chip">Проекты</span><h2 class="h2">Где работала <em class="hl">наша команда</em></h2></div>
+      <div class="sec__head"><span class="chip">Проекты</span><h2 class="h2">Где работала <em class="hl">наша команда</em></h2><p class="lead">Больше ста проектов с 2024 года. Вот несколько.</p></div>
       <div class="cases">
-        <article class="case" data-reveal style="--i:0">
-          <div class="case__img"><img src="assets/works/post15-1.jpg" alt="Промо-модели TeWork на Премии в области R&amp;D" width="533" height="666" loading="lazy"></div>
+        <article class="case case--wide" data-reveal style="--i:0">
+          <div class="case__img"><img src="assets/works/letual-1.jpg" alt="Студенты-амбассадоры Летуаль в вузе" width="900" height="1125" loading="lazy"></div>
+          <div class="case__body"><p class="case__who">Летуаль · Москва</p><h3 class="case__t">Амбассадоры в 18 вузах</h3><p>Студенты-амбассадоры две недели одновременно работали в своих вузах и продвигали «бьюти-стипендию».</p>
+            <div class="tags"><span class="tag">18 вузов</span><span class="tag">2 недели</span><span class="tag">Промо-персонал</span></div></div>
+        </article>
+        <article class="case" data-reveal style="--i:1">
+          <div class="case__img"><img src="assets/works/sber-rd.jpg" alt="Промо-модели TeWork на Премии в области R&amp;D" width="533" height="666" loading="lazy"></div>
           <div class="case__body"><p class="case__who">Сбер и Cloud.ru</p><h3 class="case__t">Премия в области R&amp;D</h3><p>Промо-модели встречали гостей, супервайзеры координировали площадку и участвовали в церемонии награждения.</p>
             <div class="tags"><span class="tag">Промо-модели</span><span class="tag">Супервайзеры</span></div></div>
         </article>
-        <article class="case" data-reveal style="--i:1">
-          <div class="case__img"><img src="assets/works/post18-1.jpg" alt="Сцена концерта при свечах Lumos Concerts" width="600" height="750" loading="lazy"></div>
-          <div class="case__body"><p class="case__who">Lumos Concerts</p><h3 class="case__t">Концерт при свечах</h3><p>Струнный квартет при свечах. На концерте работала наша команда.</p></div>
-        </article>
         <article class="case" data-reveal style="--i:2">
-          <div class="case__img"><img src="assets/works/post26-1.jpg" alt="Промоутеры TeWork на Match&amp;Stretch" width="600" height="750" loading="lazy"></div>
-          <div class="case__body"><p class="case__who">FITmost и Twinby · Санкт-Петербург</p><h3 class="case__t">Match&amp;Stretch</h3><p>30 августа 2025. Промоутеры сопровождали гостей весь день: мастер-классы, лекции, йога.</p>
-            <div class="tags"><span class="tag">Промоутеры</span><span class="tag">Координатор</span></div></div>
+          <div class="case__img"><img src="assets/works/ddx-run.jpg" alt="Команда DDX Fitness на московском забеге" width="900" height="1125" loading="lazy"></div>
+          <div class="case__body"><p class="case__who">DDX Fitness · Москва</p><h3 class="case__t">Забеги с поддержкой</h3><p>Наша команда поддерживала бегунов на московских забегах и давала мотивацию. Несколько локаций, один партнёр.</p>
+            <div class="tags"><span class="tag">Промо-персонал</span></div></div>
         </article>
         <article class="case" data-reveal style="--i:0">
-          <div class="case__img"><img src="assets/works/post12-2.jpg" alt="Йога на крыше, мероприятие FITmost" width="640" height="800" loading="lazy"></div>
+          <div class="case__img"><img src="assets/works/morozhenoe.jpg" alt="Акция «Ура, мороженое» в школе" width="900" height="1125" loading="lazy"></div>
+          <div class="case__body"><p class="case__who">Школы и университет</p><h3 class="case__t">Акция «Ура, мороженое»</h3><p>Две школы и один университет. Учащиеся отвлеклись от учёбы и попробовали новинки.</p>
+            <div class="tags"><span class="tag">Промоутеры</span></div></div>
+        </article>
+        <article class="case" data-reveal style="--i:1">
+          <div class="case__img"><img src="assets/works/fitmost-yoga.jpg" alt="Йога на крыше, мероприятие FITmost" width="640" height="800" loading="lazy"></div>
           <div class="case__body"><p class="case__who">FITmost</p><h3 class="case__t">Солнечная йога</h3><p>Йога и медитация на крыше. Ведущий вёл программу, хелперы следили за порядком.</p>
             <div class="tags"><span class="tag">Ведущий</span><span class="tag">Хелперы</span></div></div>
         </article>
-        <article class="case case--text" data-reveal style="--i:1">
+        <article class="case" data-reveal style="--i:2">
+          <div class="case__img"><img src="assets/works/match-stretch.jpg" alt="Промоутеры TeWork на Match&amp;Stretch" width="600" height="750" loading="lazy"></div>
+          <div class="case__body"><p class="case__who">FITmost и Twinby · Санкт-Петербург</p><h3 class="case__t">Match&amp;Stretch</h3><p>Промоутеры сопровождали гостей весь день: мастер-классы, лекции, йога.</p>
+            <div class="tags"><span class="tag">Промоутеры</span><span class="tag">Координатор</span></div></div>
+        </article>
+        <article class="case case--text" data-reveal style="--i:0">
           <div><p class="case__who">И ещё</p><h3 class="case__t" style="margin-top:.5rem">Другие проекты</h3></div>
           <ul>
+            <li>День рождения Rostic’s<small>промоутеры развлекали гостей ресторана</small></li>
+            <li>Концерт при свечах Lumos Concerts<small>струнный квартет, тысячи свечей</small></li>
             <li>Конференция PepsiCo<small>4 и 5 марта 2025</small></li>
             <li>SQ Clinic на InterCHARM и Russian Barber Week<small>октябрь 2025</small></li>
             <li>Стенд МТС Live<small>17 августа 2025</small></li>
-            <li>Яндекс Плюс<small>февраль 2025</small></li>
           </ul>
         </article>
-        <article class="case case--cta" data-reveal style="--i:2">
+        <article class="case case--cta" data-reveal style="--i:1">
           <div><p class="case__who">Место для вас</p><h3 class="case__t" style="margin-top:.5rem">Следующим может быть ваш проект</h3></div>
           <div class="btns"><a class="btn btn--ghost" href="#zayavka">Рассказать о мероприятии</a></div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- ОТЗЫВЫ ЗАКАЗЧИКОВ: дословно из переписки, переданы Андреем 05–06.10.2026 -->
+  <section class="sec" id="otzyvy" aria-label="Отзывы заказчиков">
+    <div class="wrap">
+      <div class="sec__head"><span class="chip">Отзывы заказчиков</span><h2 class="h2">«Всегда были на связи и оперативно <em class="hl">отвечали</em>»</h2></div>
+      <div class="reviews">
+        <figure class="review" data-reveal style="--i:0"><blockquote>«Андрей, привет! Возвращаюсь с фитбэком после ивента к тебе! Хочу поблагодарить тебя и всю команду TeWork Agency за отличную работу. Понравилось, что вы всегда были на связи и оперативно отвечали на все вопросы. Процесс работы с вами правда был прозрачным, быстрым, поэтому и мы и клиент остались только с хорошим впечатлением после мероприятия. Будем на обязательно на связи и с радостью поработаем в будущем»</blockquote><figcaption class="review__who"><span class="review__av">F</span><span><b>FITmost</b>после мероприятия</span></figcaption></figure>
+        <figure class="review" data-reveal style="--i:1"><blockquote>«Ценю работу с агентством TeWork Agency за качество и совершенный сервис. Всегда уверена, что запрос будет выполнен, потому что Андрей искренне болеет за результат. На них всегда можно положиться.»</blockquote><figcaption class="review__who"><span class="review__av">R</span><span><b>Rostic’s</b>заказчик</span></figcaption></figure>
+        <figure class="review" data-reveal style="--i:2"><blockquote>«Периодически пользуюсь услугами агенства TeWork Agency, все очень понравилось. Работают очень ответственные ребята, клиентоориентированные и отзывчивые»</blockquote><figcaption class="review__who"><span class="review__av">З</span><span><b>Заказчик масс-подбора</b>постоянный клиент</span></figcaption></figure>
+      </div>
+      <p class="reviews__note">Отзывы заказчиков без правок.</p>
     </div>
   </section>
 
@@ -656,12 +738,12 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
           <div class="btns"><a class="btn btn--ghost" href="https://t.me/TeWorkAgency" target="_blank" rel="noopener">Смотреть вакансии в Telegram</a></div>
         </div>
       </div>
-      <div class="reviews" id="otzyvy">
+      <div class="reviews reviews--workers">
         <figure class="review" data-reveal style="--i:0"><blockquote>«Работала на мероприятии фитмоста в коллаборации с твинби в Санкт-Петербурге. Всё прошло хорошо. Атмосфера была очень дружеская. Порадовала сплочённость команды. Приятным бонусом было то, что о работниках позаботились, заказали воду и еду. Оплата пришла на утро после мероприятия. Спасибо большое Андрею и TeWork! Буду ждать дальнейших проектов в Питере 😉»</blockquote><figcaption class="review__who"><span class="review__av">С</span><span><b>Софья</b>31 августа 2025</span></figcaption></figure>
         <figure class="review" data-reveal style="--i:1"><blockquote>«Работала от  TeWork Очень понравилось сотрудничество, работали в дружном и ответственном коллективе. ЗП получили в день работы . Команда всегда была на связи. Остались только положительные эмоции и добрые воспоминания»</blockquote><figcaption class="review__who"><span class="review__av">E</span><span><b>ENNI</b>13 октября 2025</span></figcaption></figure>
         <figure class="review" data-reveal style="--i:2"><blockquote>«Хочу поблагодарить команду TeWork Agency за предложение работы! На заявки отвечают профессионально и быстро. Отдельно отмечу четкую коммуникацию и ответственный подход на всех этапах. Оплата труда произведена в кратчайшие сроки, определённо рекомендую к сотрудничеству!»</blockquote><figcaption class="review__who"><span class="review__av">L</span><span><b>Lizaveta Hrabouskaya</b>20 сентября 2025</span></figcaption></figure>
       </div>
-      <p class="reviews__note">Отзывы из нашего Telegram-канала без правок. <a href="https://t.me/TeWorkfeedback" target="_blank" rel="noopener">Все 82 отзыва</a></p>
+      <p class="reviews__note">Отзывы исполнителей из нашего Telegram-канала без правок. <a href="https://t.me/TeWorkfeedback" target="_blank" rel="noopener">Все 82 отзыва</a></p>
     </div>
   </section>
 
@@ -684,7 +766,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
   <section class="sec" id="zayavka" aria-label="Заявка">
     <div class="wrap duo">
       <div>
-        <div class="sec__head" style="margin-bottom:0"><span class="chip">Заявка</span><h2 class="h2">Расскажите о <em class="hl">мероприятии</em></h2><p class="lead">Отметьте, кто нужен и в каком городе. Сообщение соберётся само, останется отправить.</p></div>
+        <div class="sec__head" style="margin-bottom:0"><span class="chip">Заявка</span><h2 class="h2">Расскажите о <em class="hl">мероприятии</em></h2><p class="lead">Отметьте, кто нужен, сколько и в каком городе. Сообщение соберётся само, останется отправить.</p></div>
         <div class="contactline"><a class="tel nums" href="tel:+79166188554">+7 916 618-85-54</a><span>WhatsApp и Telegram по этому номеру</span></div>
       </div>
       <form class="picker" data-picker data-wa="79166188554" data-greet="Здравствуйте! Нужен персонал на мероприятие">
@@ -709,6 +791,15 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
           <label class="opt"><input type="radio" name="c" value="Калининград"><span>Калининград</span></label>
           <label class="opt"><input type="radio" name="c" value="Тверь"><span>Тверь</span></label>
         </div></fieldset>
+        <fieldset><legend>Сколько человек</legend><div class="opts">
+          <label class="opt"><input type="radio" name="n" value="1–3 человека"><span>1–3</span></label>
+          <label class="opt"><input type="radio" name="n" value="4–10 человек" checked><span>4–10</span></label>
+          <label class="opt"><input type="radio" name="n" value="11–30 человек"><span>11–30</span></label>
+          <label class="opt"><input type="radio" name="n" value="больше 30 человек"><span>30+</span></label>
+        </div></fieldset>
+        <fieldset class="picker__free"><legend>Дата, время и локация, если известны</legend>
+          <input class="picker__in" type="text" name="d" data-free placeholder="например: 14 ноября, 10:00–18:00, Крокус" autocomplete="off" maxlength="120">
+        </fieldset>
         <p class="picker__out" data-out></p>
         <div class="btns"><a class="btn btn--primary" data-send href="#" target="_blank" rel="noopener">Отправить в WhatsApp</a><a class="btn btn--ghost" href="https://t.me/+79166188554" target="_blank" rel="noopener">Написать в Telegram</a></div>
       </form>
@@ -718,7 +809,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
 </main>
 
 <footer class="ftr">
-  <div class="wrap ftr__row"><span>TeWork Agency. Персонал на мероприятия.</span><span>Сайт-демо</span></div>
+  <div class="wrap ftr__row"><span>TeWork Agency. Персонал на мероприятия в семи городах.</span><span>© 2026</span></div>
   <div class="ftr__word" aria-hidden="true">TEWORK</div>
 </footer>
 
@@ -767,11 +858,12 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
     var build = function () {
       var parts = [];
       f.querySelectorAll('input:checked').forEach(function (i) { parts.push(i.value); });
+      f.querySelectorAll('[data-free]').forEach(function (i) { if (i.value.trim()) parts.push(i.value.trim()); });
       var msg = (f.dataset.greet || 'Здравствуйте! Хочу записаться') + ': ' + parts.join(', ') + '.';
       out.textContent = msg;
       if (send) send.href = f.dataset.tg ? ('https://t.me/' + f.dataset.tg) : ('https://wa.me/' + f.dataset.wa + '?text=' + encodeURIComponent(msg));
     };
-    f.addEventListener('change', build); build();
+    f.addEventListener('change', build); f.addEventListener('input', build); build();
   });
 
   // вопросы

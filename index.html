@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://vladislavhimself.github.io/tework-web/">
 <meta name="theme-color" content="#07070a">
 <link rel="icon" href="assets/favicon.svg">
-<!--FONTS--><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"><!--/FONTS-->
+<!--FONTS--><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Condensed:wght@700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Playfair+Display:ital,wght@1,700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet"><!--/FONTS-->
 <style>
 /*TOKENS — вписывается scripts/design_tokens.py из DESIGN.md, руками не править*/
 :root{
@@ -441,7 +441,7 @@ html[data-direction="neon"] .hl{background:linear-gradient(90deg,var(--pink),var
 .brands{display:grid;gap:1.4rem}
 .brands__list{display:flex;flex-wrap:wrap;gap:.5rem 2.2rem;align-items:baseline}
 .brands__list li{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(1.5rem,1.1rem + 1.5vw,2.5rem);line-height:1.1;color:var(--ink);opacity:.82;white-space:nowrap}
-.stats{margin-top:clamp(40px,5vw,72px)}
+.stats{margin-top:0}
 html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
 .stat__num{font-weight:800;letter-spacing:.01em}
 .stat__cap{max-width:26ch}
@@ -554,6 +554,24 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
   .cases{grid-template-columns:1fr}
   .hero__title{font-size:clamp(2.7rem, 13vw, 3.4rem)}
 }
+/* ===== лента брендов: ровная розовая полоса, бежит медленно, словесные знаки ===== */
+.logos{overflow:hidden;background:var(--pink);color:var(--accent-ink);padding-block:clamp(14px,1.6vw,22px);margin-block:clamp(8px,2vw,24px) 0}
+.logos__track{display:flex;align-items:center;gap:clamp(44px,5vw,88px);width:max-content;padding-inline:clamp(22px,2.5vw,44px);animation:mq 55s linear infinite}
+.lg{display:inline-flex;align-items:baseline;gap:.45em;white-space:nowrap;line-height:1}
+.lg__ic{width:1.05em;height:1.05em;align-self:center;flex:none}
+.lg__t{font-size:clamp(1.25rem,1rem + 1vw,1.85rem);letter-spacing:-.01em}
+.lg__t--sans{font-family:var(--font-text);font-weight:800}
+.lg__t--caps{letter-spacing:.01em}
+.lg__t--heavy{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.5rem,1.1rem + 1.3vw,2.3rem)}
+.lg__t--sm{font-size:clamp(.8rem,.7rem + .4vw,1rem);letter-spacing:.14em;font-weight:700}
+.lg__t--round{font-family:"Comfortaa",var(--font-text);font-weight:700;letter-spacing:-.02em}
+.lg__t--serif{font-family:"Playfair Display",Georgia,serif;font-weight:700;font-style:italic}
+.lg__t--mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:700;letter-spacing:.02em}
+@media (hover:hover) and (pointer:fine){.logos:hover .logos__track{animation-play-state:paused}}
+@media (prefers-reduced-motion:reduce){.logos__track{animation:none;flex-wrap:wrap;width:auto;gap:1rem 2rem}}
+@media (max-width:860px){.logos__track{gap:34px;animation-duration:40s}.lg__t{font-size:1.15rem}.lg__t--heavy{font-size:1.4rem}}
+.logos__cap{text-align:center;font-family:var(--font-label);font-size:var(--fs-label);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:clamp(10px,2vw,28px) 0 -4px}
+.logos{margin-top:12px}
 /*/SITE*/
 </style>
 </head>
@@ -598,23 +616,15 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
     </div>
   </section>
 
-  <!-- ЛЕНТА РОЛЕЙ -->
-  <div class="band"><div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Хостес</span><span>Промо-модели</span><span>Хелперы</span><span>Ведущие</span><span>Диджеи</span><span>Официанты</span><span>Аниматоры</span><span>Гардеробщики</span><span>Парковщики</span><span>Промо-персонал</span><span>Координаторы</span><span>Клининг</span>
-      <span>Хостес</span><span>Промо-модели</span><span>Хелперы</span><span>Ведущие</span><span>Диджеи</span><span>Официанты</span><span>Аниматоры</span><span>Гардеробщики</span><span>Парковщики</span><span>Промо-персонал</span><span>Координаторы</span><span>Клининг</span>
-    </div>
-  </div></div>
+  <!-- ЛЕНТА БРЕНДОВ: ровная полоса, бегущая строка словесных знаков (файлов логотипов нет) -->
+  <p class="logos__cap">Нам доверяют</p>
+  <div class="logos" aria-label="Нам доверяют">
+    <div class="logos__track"><span class="lg lg--sber"><svg viewBox="0 0 30 30" class="lg__ic"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="62 17" stroke-dashoffset="-6" stroke-linecap="round"/><path d="M9.5 14.5l4.5 3.5 8-7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lg__t lg__t--sans">Сбер</span></span><span class="lg lg--cloud"><span class="lg__t lg__t--mono">cloud.ru</span></span><span class="lg lg--letual"><span class="lg__t lg__t--round">лэтуаль</span></span><span class="lg lg--rostics"><span class="lg__t lg__t--serif">Rostic’s</span></span><span class="lg lg--ddx"><span class="lg__t lg__t--heavy">DDX</span><span class="lg__t lg__t--sans lg__t--sm">FITNESS</span></span><span class="lg lg--fitmost"><span class="lg__t lg__t--round">fitmost</span></span><span class="lg lg--pepsico"><span class="lg__t lg__t--sans lg__t--caps">PepsiCo</span></span><span class="lg lg--mts"><span class="lg__t lg__t--heavy">МТС</span><span class="lg__t lg__t--sans lg__t--sm">LIVE</span></span><span class="lg lg--twinby"><span class="lg__t lg__t--round">twinby</span></span><span class="lg lg--lumos"><span class="lg__t lg__t--serif">Lumos Concerts</span></span><span class="lg lg--sq"><span class="lg__t lg__t--mono">SQ CLINIC</span></span><span class="lg lg--sber"><svg viewBox="0 0 30 30" class="lg__ic"><circle cx="15" cy="15" r="12.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-dasharray="62 17" stroke-dashoffset="-6" stroke-linecap="round"/><path d="M9.5 14.5l4.5 3.5 8-7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lg__t lg__t--sans">Сбер</span></span><span class="lg lg--cloud"><span class="lg__t lg__t--mono">cloud.ru</span></span><span class="lg lg--letual"><span class="lg__t lg__t--round">лэтуаль</span></span><span class="lg lg--rostics"><span class="lg__t lg__t--serif">Rostic’s</span></span><span class="lg lg--ddx"><span class="lg__t lg__t--heavy">DDX</span><span class="lg__t lg__t--sans lg__t--sm">FITNESS</span></span><span class="lg lg--fitmost"><span class="lg__t lg__t--round">fitmost</span></span><span class="lg lg--pepsico"><span class="lg__t lg__t--sans lg__t--caps">PepsiCo</span></span><span class="lg lg--mts"><span class="lg__t lg__t--heavy">МТС</span><span class="lg__t lg__t--sans lg__t--sm">LIVE</span></span><span class="lg lg--twinby"><span class="lg__t lg__t--round">twinby</span></span><span class="lg lg--lumos"><span class="lg__t lg__t--serif">Lumos Concerts</span></span><span class="lg lg--sq"><span class="lg__t lg__t--mono">SQ CLINIC</span></span></div>
+  </div>
 
   <!-- БРЕНДЫ И ЦИФРЫ -->
-  <section class="sec" aria-label="Нам доверяют">
+  <section class="sec sec--tight" aria-label="В цифрах">
     <div class="wrap">
-      <div class="brands" data-reveal>
-        <span class="chip">Нам доверяют</span>
-        <ul class="brands__list">
-          <li>Сбер</li><li>Cloud.ru</li><li>Летуаль</li><li>Rostic’s</li><li>DDX Fitness</li><li>FITmost</li><li>PepsiCo</li><li>МТС Live</li><li>Twinby</li><li>Lumos Concerts</li><li>SQ Clinic</li>
-        </ul>
-      </div>
       <ul class="stats nums" data-reveal>
         <li class="stat"><div class="stat__num">7</div><p class="stat__cap">городов: Москва, Санкт-Петербург, Сочи, Казань, Самара, Калининград, Тверь</p></li>
         <li class="stat"><div class="stat__num">14</div><p class="stat__cap">ролей: от хостес до координатора площадки</p></li>

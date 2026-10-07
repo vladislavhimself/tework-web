@@ -566,6 +566,57 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
 @media (prefers-reduced-motion:reduce){.logos__track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;gap:1.2rem 2.2rem}}
 @media (max-width:860px){.logos{padding-block:16px}.logos__track{gap:34px;animation-duration:45s}.lg img{height:19px;max-width:150px}.lg img[alt="Rostic’s"],.lg img[alt="Lumos Concerts"]{height:14px}.lg img[alt="DDX Fitness"],.lg img[alt="МТС Live"],.lg img[alt="PepsiCo"]{height:23px}}
 .logos__cap{text-align:center;font-family:var(--font-label);font-size:var(--fs-label);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);margin:clamp(10px,2vw,28px) 0 -4px}
+/* ===== v3: бургер, меню, анкета, прайс, светлые разрезы ===== */
+.burger{display:none;width:44px;height:44px;margin-left:auto;flex:none;position:relative;border-radius:12px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.burger span{position:absolute;left:12px;right:12px;height:2px;background:var(--ink);border-radius:2px;transition:translate 250ms var(--ease-out),rotate 250ms var(--ease-out),opacity 150ms ease}
+.burger span:nth-child(1){top:15px}.burger span:nth-child(2){top:21px}.burger span:nth-child(3){top:27px}
+body.menu-on .burger span:nth-child(1){translate:0 6px;rotate:45deg}
+body.menu-on .burger span:nth-child(2){opacity:0}
+body.menu-on .burger span:nth-child(3){translate:0 -6px;rotate:-45deg}
+.menu{position:fixed;inset:0;z-index:39;background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);overflow:auto}
+.menu__in{padding:96px var(--gutter) 40px;display:grid;gap:4px;max-width:520px}
+.menu__in > a:not(.btn){font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,9vw,2.8rem);line-height:1.05;padding:.28em 0;border-bottom:1px solid var(--line);opacity:0;translate:0 10px;animation:menuIn 420ms var(--ease-out) forwards;animation-delay:calc(var(--i,0) * 40ms)}
+.menu__cta{margin-top:22px;width:100%}
+.menu__tel{margin-top:16px;display:grid;gap:4px;color:var(--ink-soft);font-size:.9rem}
+.menu__tel a{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:var(--ink)}
+@keyframes menuIn{to{opacity:1;translate:0 0}}
+body.menu-on{overflow:hidden}
+body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
+@media (max-width:980px){.burger{display:block}.hdr__in .btn{display:none}}
+@media (prefers-reduced-motion:reduce){.menu__in > a:not(.btn){animation:none;opacity:1;translate:none}}
+/* анкета-пример */
+.anketa{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,2vw,26px);display:grid;gap:18px;color:var(--ink);box-shadow:0 40px 80px -50px rgba(0,0,0,.7)}
+.anketa__top{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-label);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.anketa__n{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:var(--pink);letter-spacing:0}
+.anketa__body{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:18px;align-items:start}
+.anketa__photo svg{width:100%;height:auto;display:block;color:var(--ink)}
+.anketa__info{display:grid;gap:14px}
+.anketa__name,.anketa__lines{display:grid;gap:8px}
+.anketa__name i,.anketa__lines i{display:block;height:8px;border-radius:4px;background:color-mix(in srgb,var(--ink) 16%,transparent)}
+.anketa__name i:first-child{height:14px;width:80%;background:color-mix(in srgb,var(--ink) 34%,transparent)}
+.anketa__stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.anketa__stats div{background:color-mix(in srgb,var(--ink) 5%,transparent);border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:grid;gap:2px}
+.anketa__stats small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)}
+.anketa__stats b{font-family:var(--font-display);font-weight:800;font-size:1.15rem}
+.anketa__tags{display:flex;flex-wrap:wrap;gap:6px}
+.anketa__tags span{font-size:.78rem;padding:.3em .7em;border:1px solid var(--line-strong);border-radius:999px;color:var(--ink-soft)}
+/* прайс */
+.price{display:grid;gap:4px;margin-top:2.2rem}
+.price .group__t{margin:22px 0 6px}
+.price .group__t:first-child{margin-top:0}
+.price .row{grid-template-columns:minmax(0,1fr) auto;padding:.9rem 0}
+.price__v{font-family:var(--font-text);font-weight:600;white-space:nowrap;color:var(--ink)}
+.act__gift{font-size:var(--fs-small);color:var(--ink-soft);line-height:1.5;padding:.6rem 0 .8rem;border-bottom:1px dashed var(--line-strong)}
+.act--sticky{top:92px}
+/* светлые разрезы: белые секции с розовым акцентом в выделенном слове и кнопке */
+.sec--paper{--paper-accent:#c8284a}
+.sec--paper .step__n{color:var(--ink-mute)}
+.sec--paper .review{background:#fff;border-color:rgba(0,0,0,.08)}
+.sec--paper .tag{border-color:rgba(0,0,0,.14);color:var(--ink-soft)}
+.sec--paper .btn--primary{background:#0b0a10;color:#fff}
+.sec--paper + .sec:not(.sec--paper){border-top:0;padding-top:var(--sec-pad)}
+.sec:not(.sec--paper) + .sec--paper{padding-top:var(--sec-pad)}
+@media (max-width:860px){.anketa__body{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px}.anketa__stats{grid-template-columns:1fr 1fr}.price .row{padding:.75rem 0}.price__v{font-size:.92rem}}
 /*/SITE*/
 </style>
 </head>
@@ -583,11 +634,19 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="#top" aria-label="TeWork Agency, наверх"><svg viewBox="-22 0 214 222" aria-hidden="true"><circle cx="-2" cy="62" r="17" fill="#fc7f6b"/><rect x="10" y="100" width="22" height="120" fill="#f6bccb"/><polygon points="32,96 54,104 54,220 32,220" fill="#0a509a"/><rect x="58" y="58" width="24" height="162" fill="#f6bccb"/><polygon points="82,52 110,62 110,220 82,220" fill="#0a509a"/><rect x="114" y="14" width="26" height="206" fill="#f6bccb"/><polygon points="140,22 190,34 190,220 140,220" fill="#0a509a"/></svg>TEWORK</a>
     <nav class="hdr__nav" aria-label="Разделы">
-      <a href="#personal">Персонал</a><a href="#kak">Как работаем</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a>
+      <a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#kak">Как работаем</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a>
     </nav>
     <a class="btn btn--primary btn--sm" href="#zayavka">Подобрать персонал</a>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
 </header>
+<nav class="menu" id="menu" aria-label="Меню" hidden>
+  <div class="menu__in">
+    <a style="--i:0" href="#personal">Персонал</a><a style="--i:1" href="#ceny">Цены</a><a style="--i:2" href="#kak">Как работаем</a><a style="--i:3" href="#proekty">Проекты</a><a style="--i:4" href="#otzyvy">Отзывы</a><a style="--i:5" href="#rabota">Работа у нас</a><a style="--i:6" href="#voprosy">Вопросы</a>
+    <a class="btn btn--ghost menu__cta" href="#zayavka">Подобрать персонал</a>
+    <p class="menu__tel"><a href="tel:+79166188554">+7 916 618-85-54</a><span>WhatsApp и Telegram</span></p>
+  </div>
+</nav>
 
 <main id="top">
 
@@ -603,7 +662,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
         <div class="brandmark" aria-hidden="true">
           <svg class="brandmark__svg" viewBox="-22 0 214 222"><circle class="dot" cx="-2" cy="62" r="17" fill="#fc7f6b"/><rect class="bar" style="--i:0" x="10" y="100" width="22" height="120" fill="#f6bccb"/><polygon class="bar" style="--i:1" points="32,96 54,104 54,220 32,220" fill="#0a509a"/><rect class="bar" style="--i:2" x="58" y="58" width="24" height="162" fill="#f6bccb"/><polygon class="bar" style="--i:3" points="82,52 110,62 110,220 82,220" fill="#0a509a"/><rect class="bar" style="--i:4" x="114" y="14" width="26" height="206" fill="#f6bccb"/><polygon class="bar" style="--i:5" points="140,22 190,34 190,220 140,220" fill="#0a509a"/></svg>
           <div class="fcard fcard--a" style="--i:0"><div class="fcard__big nums">100+</div><p class="fcard__cap">проектов с 2024 года</p></div>
-          <div class="fcard fcard--b" style="--i:1"><div class="fcard__big nums">2 091</div><p class="fcard__cap">человек в базе исполнителей</p></div>
+          <div class="fcard fcard--b" style="--i:1"><div class="fcard__big nums" data-members data-fallback="2 000+">2 000+</div><p class="fcard__cap">человек в базе исполнителей</p></div>
         </div>
         <a class="btn btn--primary hero__cta" href="#zayavka">Подобрать персонал <svg class="btn__arr" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
       </div>
@@ -646,17 +705,17 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
           <h3 class="h3">Площадка</h3>
           <ul class="roles"><li>Координация мероприятий</li><li>Клининг</li><li>Охрана <small>только Москва</small></li></ul></article>
       </div>
-      <p class="pricenote">Ставка зависит от роли, города и графика смен. Назовём её, когда узнаем задачу.</p>
+      <p class="pricenote">Ставки «от» по ролям — <a href="#ceny">в прайсе ниже</a>. Итог зависит от города и графика смен.</p>
     </div>
   </section>
 
   <!-- КАК РАБОТАЕМ -->
-  <section class="sec" id="kak" aria-label="Как мы работаем">
+  <section class="sec sec--paper" id="kak" aria-label="Как мы работаем">
     <div class="wrap zgrid">
       <div class="sec__head"><span class="chip">Как работаем</span><h2 class="h2">От заявки до <em class="hl">площадки</em></h2><p class="lead">Вам не нужно искать людей и следить за ними на мероприятии. Это наша работа.</p></div>
       <ol class="steps">
         <li class="step" data-reveal style="--i:0"><span class="step__n nums">01</span><h3 class="step__t">Вы рассказываете о мероприятии</h3><p class="step__d">Город, дата, сколько людей и в каких ролях. Хватит сообщения в мессенджере.</p></li>
-        <li class="step" data-reveal style="--i:1"><span class="step__n nums">02</span><h3 class="step__t">Подбираем людей и показываем вам</h3><p class="step__d">Из постоянной базы, с опытом работы на мероприятиях. Присылаем презентацию с кандидатами: фото и опыт, вы выбираете. Срочную заявку закрываем за 1–2 дня.</p><span class="tag">1–2 дня</span></li>
+        <li class="step" data-reveal style="--i:1"><span class="step__n nums">02</span><h3 class="step__t">Подбираем людей и показываем вам</h3><p class="step__d">Из постоянной базы, с опытом работы на мероприятиях. Присылаем презентацию с кандидатами: фото, рост, возраст, опыт. Вы выбираете. Срочную заявку закрываем за 1–2 дня.</p><span class="tag">1–2 дня</span></li>
         <li class="step" data-reveal style="--i:2"><span class="step__n nums">03</span><h3 class="step__t">Заключаем договор</h3><p class="step__d">Работаем по договору. Условия обсуждаем до мероприятия.</p><span class="tag">договор</span></li>
         <li class="step" data-reveal style="--i:3"><span class="step__n nums">04</span><h3 class="step__t">Координируем на площадке</h3><p class="step__d">Супервайзер ведёт команду: ребята работают слаженно и знают, что делать.</p></li>
         <li class="step" data-reveal style="--i:4"><span class="step__n nums">05</span><h3 class="step__t">Находим замену</h3><p class="step__d">Если кто-то не вышел на смену, ставим другого человека из базы.</p></li>
@@ -666,15 +725,66 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
 
 
 
+  <!-- ПРИМЕР АНКЕТЫ: схема, без реальных людей (анкеты с ФИО — только заказчику после заявки) -->
+  <section class="sec" id="anketa" aria-label="Как выглядит подбор">
+    <div class="wrap duo duo--media">
+      <div>
+        <div class="sec__head" style="margin-bottom:0"><span class="chip">Презентация кандидатов</span><h2 class="h2">Вы видите людей <em class="hl">до мероприятия</em></h2>
+          <p class="lead">На каждого кандидата — карточка с фото, ростом, возрастом и опытом на похожих проектах. Вы отмечаете, кто подходит, остальное делаем мы.</p></div>
+        <div class="facts">
+          <div><b>Фото и параметры</b><span>рост, возраст, размер одежды, если нужна форма</span></div>
+          <div><b>Опыт по брендам</b><span>где и кем работал: выставки, стенды, фестивали</span></div>
+          <div><b>Отзывы</b><span>ссылка на отзывы о работе исполнителя</span></div>
+          <div><b>Замена из той же презентации</b><span>если кто-то не вышел, берём следующего</span></div>
+        </div>
+      </div>
+      <div class="anketa" data-reveal aria-hidden="true">
+        <div class="anketa__top"><span class="anketa__brand">TEWORK · анкета промо</span><span class="anketa__n">02</span></div>
+        <div class="anketa__body">
+          <div class="anketa__photo"><svg viewBox="0 0 120 160"><rect width="120" height="160" rx="8" fill="currentColor" opacity=".08"/><circle cx="60" cy="58" r="24" fill="currentColor" opacity=".18"/><path d="M18 150c4-32 24-46 42-46s38 14 42 46" fill="currentColor" opacity=".18"/></svg></div>
+          <div class="anketa__info">
+            <div class="anketa__name"><i></i><i style="width:62%"></i></div>
+            <div class="anketa__stats"><div><small>Рост</small><b>170 см</b></div><div><small>Возраст</small><b>23</b></div><div><small>Опыт</small><b>3 года</b></div></div>
+            <div class="anketa__tags"><span>Хостес</span><span>Промо-модель</span><span>Выставки</span><span>Стенды</span></div>
+            <div class="anketa__lines"><i></i><i style="width:84%"></i><i style="width:58%"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПРАЙС: ставки «от», как попросил владелец (образец — anytie.ru) -->
+  <section class="sec" id="ceny" aria-label="Цены">
+    <div class="wrap duo duo--act">
+      <div>
+        <div class="sec__head"><span class="chip">Цены</span><h2 class="h2">Ставки <em class="hl">от</em></h2><p class="lead">Итог зависит от формата, города и графика смен. Точную сумму называем до начала работы.</p></div>
+        <div class="price">
+          <p class="group__t">Гости и сервис</p>
+          <ul class="rows"><li class="row"><span class="row__name">Хостес</span><span class="price__v nums">от 1 000 ₽/час</span></li><li class="row"><span class="row__name">Промо-персонал</span><span class="price__v nums">от 900 ₽/час</span></li><li class="row"><span class="row__name">Экскурсоводы</span><span class="price__v nums">от 1 000 ₽/час</span></li></ul>
+          <p class="group__t">Шоу и программа</p>
+          <ul class="rows"><li class="row"><span class="row__name">Аниматоры</span><span class="price__v nums">от 2 500 ₽/час</span></li><li class="row"><span class="row__name">Фотографы и видеографы</span><span class="price__v nums">от 4 000 ₽/час</span></li><li class="row"><span class="row__name">Стилисты и гримёры</span><span class="price__v nums">от 4 000 ₽/час</span></li></ul>
+          <p class="group__t">Продакшн и координация</p>
+          <ul class="rows"><li class="row"><span class="row__name">Помощники на площадке</span><span class="price__v nums">от 800 ₽/час</span></li><li class="row"><span class="row__name">Координация</span><span class="price__v nums">от 1 000 ₽/час</span></li><li class="row"><span class="row__name">Обучение сервису</span><span class="price__v nums">от 30 000 ₽/услуга</span></li></ul>
+        </div>
+      </div>
+      <aside class="act act--sticky" data-reveal aria-label="Расчёт">
+        <div class="act__top"><div><p class="label">Расчёт</p><p class="act__meta">по вашему мероприятию</p></div><div class="act__price nums">1–2 дня</div></div>
+        <p class="act__gift">Напишите роли, количество и дату. Пришлём ставки и презентацию кандидатов.</p>
+        <a class="btn btn--primary" href="#zayavka">Подобрать персонал</a>
+        <a class="btn btn--ghost" href="https://t.me/+79166188554" target="_blank" rel="noopener">Написать в Telegram</a>
+      </aside>
+    </div>
+  </section>
+
   <!-- ПРОЕКТЫ: фото от агентства (оригиналы), подписи — из описаний Андрея -->
   <section class="sec" id="proekty" aria-label="Проекты">
     <div class="wrap">
       <div class="sec__head"><span class="chip">Проекты</span><h2 class="h2">Где работала <em class="hl">наша команда</em></h2><p class="lead">Больше ста проектов с 2024 года. Вот несколько.</p></div>
       <div class="cases">
         <article class="case case--wide" data-reveal style="--i:0">
-          <div class="case__img"><img src="assets/works/letual-1.jpg" alt="Студенты-амбассадоры Летуаль в вузе" width="900" height="1125" loading="lazy"></div>
-          <div class="case__body"><p class="case__who">Летуаль · Москва</p><h3 class="case__t">Амбассадоры в 18 вузах</h3><p>Студенты-амбассадоры две недели одновременно работали в своих вузах и продвигали «бьюти-стипендию».</p>
-            <div class="tags"><span class="tag">18 вузов</span><span class="tag">2 недели</span><span class="tag">Промо-персонал</span></div></div>
+          <div class="case__img"><img src="assets/works/letual-group.jpg" alt="Амбассадоры Летуаль, общее фото команды" width="1400" height="933" loading="lazy"></div>
+          <div class="case__body"><p class="case__who">Летуаль · Москва</p><h3 class="case__t">78 амбассадоров в 18 вузах</h3><p>Студенты-амбассадоры две недели одновременно работали в своих вузах и продвигали «бьюти-стипендию».</p>
+            <div class="tags"><span class="tag">78 человек</span><span class="tag">18 вузов</span><span class="tag">2 недели</span></div></div>
         </article>
         <article class="case" data-reveal style="--i:1">
           <div class="case__img"><img src="assets/works/sber-rd.jpg" alt="Промо-модели TeWork на Премии в области R&amp;D" width="533" height="666" loading="lazy"></div>
@@ -720,7 +830,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
   </section>
 
   <!-- ОТЗЫВЫ ЗАКАЗЧИКОВ: дословно из переписки, переданы Андреем 05–06.10.2026 -->
-  <section class="sec" id="otzyvy" aria-label="Отзывы заказчиков">
+  <section class="sec sec--paper" id="otzyvy" aria-label="Отзывы заказчиков">
     <div class="wrap">
       <div class="sec__head"><span class="chip">Отзывы заказчиков</span><h2 class="h2">«Всегда были на связи и оперативно <em class="hl">отвечали</em>»</h2></div>
       <div class="reviews">
@@ -756,7 +866,7 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
     <div class="wrap faq">
       <div class="sec__head" style="margin:0"><span class="chip">Вопросы</span><h2 class="h2">Что спрашивают <em class="hl">заказчики</em></h2></div>
       <div class="faq__list">
-        <div class="qa"><button class="qa__q" type="button" aria-expanded="false">Сколько стоит персонал?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Зависит от роли и города. Напишите задачу, и мы назовём сумму до начала работы.</p></div></div></div>
+        <div class="qa"><button class="qa__q" type="button" aria-expanded="false">Сколько стоит персонал?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Ставки «от» по ролям есть <a href="#ceny">в прайсе</a>: хостес от 1 000 ₽/час, промо-персонал от 900 ₽/час. Итог зависит от города и графика, точную сумму называем до начала работы.</p></div></div></div>
         <div class="qa"><button class="qa__q" type="button" aria-expanded="false">За сколько вы найдёте людей?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Срочную заявку закрываем за 1–2 дня. Чем раньше напишете, тем больше выбор людей.</p></div></div></div>
         <div class="qa"><button class="qa__q" type="button" aria-expanded="false">Что если человек не выйдет на смену?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Найдём замену. Мы работаем с постоянной базой людей, поэтому есть кем заменить.</p></div></div></div>
         <div class="qa"><button class="qa__q" type="button" aria-expanded="false">Вы работаете по договору?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Да, работаем по договору.</p></div></div></div>
@@ -829,6 +939,23 @@ html[data-direction="neon"] .stats{gap:clamp(16px,2.4vw,36px)}
   if (d.querySelector('.hero__logo, .hero__mark')) b.classList.add('has-hero-logo');
   requestAnimationFrame(function () { requestAnimationFrame(function () { b.classList.add('is-ready'); }); });
 
+  // бургер-меню (телефон)
+  var burger = d.getElementById('burger'), menu = d.getElementById('menu');
+  if (burger && menu) {
+    var setMenu = function (open) { menu.hidden = !open; b.classList.toggle('menu-on', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню'); };
+    burger.addEventListener('click', function () { setMenu(menu.hidden); });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
+  }
+  // число участников канала вакансий: читаем публичную страницу t.me через r.jina.ai; не вышло — остаётся запасное значение
+  d.querySelectorAll('[data-members]').forEach(function (el) {
+    fetch('https://r.jina.ai/https://t.me/TeWorkAgency', { headers: { 'Accept': 'text/plain' } }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+      var m = t.match(/(\d[\d\s\u00a0]{2,})\s*(members|участник|subscribers|подписчик)/i);
+      if (!m) return;
+      var n = parseInt(m[1].replace(/\D/g, ''), 10);
+      if (n > 100) el.textContent = n.toLocaleString('ru-RU').replace(/\u00a0/g, ' ');
+    }).catch(function () {});
+  });
   // шапка
   var hdr = d.getElementById('hdr');
   var onScroll = function () { hdr && hdr.classList.toggle('is-scrolled', scrollY > 30); };

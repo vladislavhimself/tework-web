@@ -692,6 +692,24 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 @media (max-width:520px){.ftr__top{grid-template-columns:1fr}.ftr__nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .case--wide .case__body{align-content:center}
 .case .tags{align-items:center}
+/* ===== v5: «О компании» по образцу eventora ===== */
+.about__story{display:grid;gap:.9rem;margin-top:1.4rem;max-width:54ch;color:var(--ink-soft);line-height:1.6}
+.about__story p:nth-child(2){color:var(--ink)}
+.about__sign{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.4rem;color:var(--ink);margin-top:.4rem;letter-spacing:.02em}
+.founder{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;max-width:460px;justify-self:end;width:100%;background:var(--surface);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
+.founder img{width:100%;height:100%;object-fit:cover;display:block;filter:var(--photo-filter,none)}
+.founder figcaption{position:absolute;inset:auto 0 0 0;padding:clamp(60px,8vw,90px) 22px 22px;display:grid;gap:.25rem;background:linear-gradient(to top,rgba(7,7,10,.92),rgba(7,7,10,0))}
+.founder b{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.5rem,1.2rem + 1vw,2.1rem);line-height:1}
+.founder span{color:var(--ink-soft);font-size:.92rem}
+.about__h3{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.8rem,1.3rem + 1.6vw,2.8rem);line-height:1;margin:clamp(48px,6vw,88px) 0 clamp(20px,2.4vw,32px);padding-top:clamp(28px,3vw,40px);border-top:1px solid var(--line)}
+#o-nas .stats{margin-top:0}
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.values li{display:grid;gap:.6rem;align-content:start;padding:clamp(18px,2.2vw,26px);border:1px solid var(--line);border-radius:var(--radius);background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.values b{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,1.05rem + .8vw,1.8rem);line-height:1}
+.values p{color:var(--ink-soft);font-size:var(--fs-small);line-height:1.55}
+@media (max-width:980px){.values{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.founder{max-width:none;justify-self:stretch;aspect-ratio:4/5}.about{align-items:start}}
+@media (max-width:560px){.values{grid-template-columns:1fr;gap:10px}.values li{padding:16px}}
 /*/SITE*/
 </style>
 </head>
@@ -709,7 +727,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="#top" aria-label="TeWork Agency, наверх"><svg viewBox="0 0 390 421" aria-hidden="true"><circle cx="34" cy="110" r="34" fill="#fe8069"/><polygon points="51,181 85,160 85,421 51,421" fill="#fdc1cb"/><polygon points="85,160 128,176 128,421 85,421" fill="#005193"/><polygon points="128,111 176,82 176,421 128,421" fill="#fdc1cb"/><polygon points="176,82 232,105 232,421 176,421" fill="#005193"/><polygon points="232,34 288,0 288,421 232,421" fill="#fdc1cb"/><polygon points="288,0 390,40 390,421 288,421" fill="#005193"/></svg>TEWORK</a>
     <nav class="hdr__nav" aria-label="Разделы">
-      <a href="#o-nas">О нас</a><a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a><a href="#kontakty">Контакты</a>
+      <a href="#o-nas">О компании</a><a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a><a href="#kontakty">Контакты</a>
     </nav>
     <a class="hdr__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2aabee"/><path fill="#fff" d="M5.2 11.7 17.6 6.9c.6-.22 1.12.14.93.98l-2.1 9.9c-.16.72-.6.9-1.2.56l-3.3-2.43-1.6 1.54c-.18.18-.33.33-.67.33l.24-3.38 6.15-5.56c.27-.24-.06-.37-.41-.13l-7.6 4.79-3.27-1.02c-.71-.22-.72-.71.15-1.05z"/></svg></a>
     <a class="btn btn--primary btn--sm" href="#zayavka">Подобрать персонал</a>
@@ -718,7 +736,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 </header>
 <nav class="menu" id="menu" aria-label="Меню" hidden>
   <div class="menu__in">
-    <a style="--i:0" href="#o-nas">О нас</a><a style="--i:1" href="#personal">Персонал</a><a style="--i:2" href="#ceny">Цены</a><a style="--i:3" href="#kak">Как работаем</a><a style="--i:4" href="#proekty">Проекты</a><a style="--i:5" href="#otzyvy">Отзывы</a><a style="--i:6" href="#rabota">Работа у нас</a><a style="--i:7" href="#voprosy">Вопросы</a><a style="--i:8" href="#kontakty">Контакты</a>
+    <a style="--i:0" href="#o-nas">О компании</a><a style="--i:1" href="#personal">Персонал</a><a style="--i:2" href="#ceny">Цены</a><a style="--i:3" href="#kak">Как работаем</a><a style="--i:4" href="#proekty">Проекты</a><a style="--i:5" href="#otzyvy">Отзывы</a><a style="--i:6" href="#rabota">Работа у нас</a><a style="--i:7" href="#voprosy">Вопросы</a><a style="--i:8" href="#kontakty">Контакты</a>
     <a class="btn btn--ghost menu__cta" href="#zayavka">Подобрать персонал</a>
     <p class="menu__tel"><a href="tel:+79166188554">+7 916 618-85-54</a><span><a class="menu__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener">Telegram</a> · <a class="menu__tg" href="https://wa.me/79166188554" target="_blank" rel="noopener">WhatsApp</a></span></p>
   </div>
@@ -751,29 +769,42 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     <div class="logos__track"><span class="lg"><img src="assets/logos/sber-w.svg" alt="Сбер" width="302" height="50" loading="lazy"></span><span class="lg"><img src="assets/logos/cloud-w.svg" alt="Cloud.ru" width="130" height="24" loading="lazy"></span><span class="lg"><img src="assets/logos/letoile-w.svg" alt="Летуаль" width="346" height="51" loading="lazy"></span><span class="lg"><img src="assets/logos/rostics-w.svg" alt="Rostic’s" width="950" height="168" loading="lazy"></span><span class="lg"><img src="assets/logos/ddx-w.svg" alt="DDX Fitness" width="150" height="32" loading="lazy"></span><span class="lg"><img src="assets/logos/fitmost-w.svg" alt="Фитмост" width="465" height="86" loading="lazy"></span><span class="lg"><img src="assets/logos/pepsico-w.svg" alt="PepsiCo" width="576" height="133" loading="lazy"></span><span class="lg"><img src="assets/logos/mts-live-w.svg" alt="МТС Live" width="120" height="56" loading="lazy"></span><span class="lg"><img src="assets/logos/twinby-w.svg" alt="Twinby" width="155" height="29" loading="lazy"></span><span class="lg"><img src="assets/logos/lumos-w.svg" alt="Lumos Concerts" width="2438" height="410" loading="lazy"></span><span class="lg"><img src="assets/logos/sq-clinic-w.svg" alt="SQ Clinic" width="245" height="40" loading="lazy"></span><span class="lg"><img src="assets/logos/sber-w.svg" alt="Сбер" width="302" height="50" loading="lazy"></span><span class="lg"><img src="assets/logos/cloud-w.svg" alt="Cloud.ru" width="130" height="24" loading="lazy"></span><span class="lg"><img src="assets/logos/letoile-w.svg" alt="Летуаль" width="346" height="51" loading="lazy"></span><span class="lg"><img src="assets/logos/rostics-w.svg" alt="Rostic’s" width="950" height="168" loading="lazy"></span><span class="lg"><img src="assets/logos/ddx-w.svg" alt="DDX Fitness" width="150" height="32" loading="lazy"></span><span class="lg"><img src="assets/logos/fitmost-w.svg" alt="Фитмост" width="465" height="86" loading="lazy"></span><span class="lg"><img src="assets/logos/pepsico-w.svg" alt="PepsiCo" width="576" height="133" loading="lazy"></span><span class="lg"><img src="assets/logos/mts-live-w.svg" alt="МТС Live" width="120" height="56" loading="lazy"></span><span class="lg"><img src="assets/logos/twinby-w.svg" alt="Twinby" width="155" height="29" loading="lazy"></span><span class="lg"><img src="assets/logos/lumos-w.svg" alt="Lumos Concerts" width="2438" height="410" loading="lazy"></span><span class="lg"><img src="assets/logos/sq-clinic-w.svg" alt="SQ Clinic" width="245" height="40" loading="lazy"></span></div>
   </div>
 
-  <!-- О НАС: название, кто ведёт проекты, цифры (просьба Андрея 07.10) -->
-  <section class="sec" id="o-nas" aria-label="О нас">
+  <!-- О КОМПАНИИ: структура как у eventora.ru/o-kompanii (Андрей 19.10): история от первого лица + фото, «Сегодня мы», ценности. Факты — из анкеты Андрея (Maxler_promo) и каналов -->
+  <section class="sec" id="o-nas" aria-label="О компании">
     <div class="wrap">
       <div class="duo about">
         <div>
-          <div class="sec__head" style="margin-bottom:0"><span class="chip">О нас</span><h2 class="h2">Сами начинали <em class="hl">на площадке</em></h2>
-            <p class="lead">Название TeWork значит Temporary Work, временная работа. Подбираем персонал и организуем мероприятия в семи городах.</p></div>
-          <div class="about__text">
-            <p>Андрей Афонин, куратор проектов, четыре года работает в промо. Сам выходил на смены промоутером и ведущим: VK&nbsp;Fest, ЦУМ, концерты в Лужниках.</p>
-            <p>Исполнителям платим в день работы или на следующее утро. Поэтому база у нас постоянная, и замену находим среди своих.</p>
+          <div class="sec__head" style="margin-bottom:0"><span class="chip">О компании</span><h2 class="h2">История <em class="hl">TeWork</em></h2>
+            <p class="lead">TeWork значит Temporary Work, временная работа. Люди на один проект, которые возвращаются на следующий.</p></div>
+          <div class="about__story">
+            <p>Я пришёл в мероприятия с площадки. Четыре года в промо: промоутером на VK&nbsp;Fest, аниматором в ЦДМ, ведущим на детских праздниках, на концертах в Лужниках и в павильоне VK на ВДНХ. Параллельно три с половиной года официантом.</p>
+            <p>С площадки видно главное: событие делают люди, которые на него вышли. Найти персонал несложно. Сложно собрать команду, которая придёт вовремя, отработает смену и вернётся на следующий проект.</p>
+            <p>Для этого появился TeWork. Мы собрали свою базу исполнителей, платим им сразу после смены и сами стоим с ними на площадке. Заказчику это даёт понятный результат: люди на месте, супервайзер на связи, замена, если кто-то не вышел.</p>
+            <p class="about__sign">Андрей Афонин</p>
           </div>
         </div>
-        <figure class="about__card" data-reveal>
-          <div class="about__logo"><svg viewBox="0 0 390 421" aria-hidden="true"><circle cx="34" cy="110" r="34" fill="#fe8069"/><polygon points="51,181 85,160 85,421 51,421" fill="#fdc1cb"/><polygon points="85,160 128,176 128,421 85,421" fill="#005193"/><polygon points="128,111 176,82 176,421 128,421" fill="#fdc1cb"/><polygon points="176,82 232,105 232,421 176,421" fill="#005193"/><polygon points="232,34 288,0 288,421 232,421" fill="#fdc1cb"/><polygon points="288,0 390,40 390,421 288,421" fill="#005193"/></svg><p><b>TEWORK</b><span>Temporary Work</span></p></div>
-          <blockquote>«Андрей искренне болеет за результат»</blockquote>
-          <figcaption>Rostic’s, из отзыва заказчика</figcaption>
+        <figure class="founder" data-reveal>
+          <img src="assets/andrey.jpg?v=5" alt="Андрей Афонин, основатель TeWork" width="844" height="1125" loading="lazy" decoding="async">
+          <figcaption><b>Андрей Афонин</b><span>основатель TeWork, куратор проектов</span></figcaption>
         </figure>
       </div>
+
+      <h3 class="about__h3">Сегодня мы</h3>
       <ul class="stats nums" data-reveal>
+        <li class="stat"><div class="stat__num">100+</div><p class="stat__cap">проектов с 2024 года: от промо в школах до премии Сбера</p></li>
+        <li class="stat"><div class="stat__num" data-members data-fallback="2 000+">2 000+</div><p class="stat__cap">исполнителей в базе, с опытом на мероприятиях</p></li>
         <li class="stat"><div class="stat__num">7</div><p class="stat__cap">городов: Москва, Санкт-Петербург, Сочи, Казань, Самара, Калининград, Тверь</p></li>
         <li class="stat"><div class="stat__num">14</div><p class="stat__cap">ролей: от хостес до координатора площадки</p></li>
-        <li class="stat"><div class="stat__num">1–2 дня</div><p class="stat__cap">закрываем срочную заявку</p></li>
-        <li class="stat"><div class="stat__num">100+</div><p class="stat__cap">проектов с 2024 года: от промо в школах до премий Сбера</p></li>
+      </ul>
+
+      <h3 class="about__h3">Ценности TeWork</h3>
+      <ul class="values">
+        <li data-reveal style="--i:0"><b>Люди для событий</b><p>Под каждую задачу собираем команду из своей базы, а не по объявлению. Хостес, промо, хелперы, ведущие: 14 ролей.</p></li>
+        <li data-reveal style="--i:1"><b>Вы видите людей заранее</b><p>Перед мероприятием присылаем презентацию кандидатов с фото, ростом, возрастом и опытом. Кого брать, решаете вы.</p></li>
+        <li data-reveal style="--i:2"><b>Ответственность за смену</b><p>Если человек не вышел, ставим другого из той же презентации. Супервайзер на площадке и на связи с вами.</p></li>
+        <li data-reveal style="--i:3"><b>Скорость</b><p>Срочную заявку закрываем за 1–2 дня. Чем раньше напишете, тем больше выбор.</p></li>
+        <li data-reveal style="--i:4"><b>Честность с исполнителями</b><p>Платим в день работы или на следующее утро. Поэтому люди возвращаются к нам, а не ищут другое агентство.</p></li>
+        <li data-reveal style="--i:5"><b>Честность с заказчиком</b><p>Ставки «от» открыты в прайсе, точную сумму называем до начала работы. Работаем по договору.</p></li>
       </ul>
     </div>
   </section>
@@ -1035,7 +1066,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 <footer class="ftr">
   <div class="wrap ftr__top">
     <div class="ftr__brand"><a class="ftr__logo" href="#top" aria-label="TeWork Agency, наверх"><svg viewBox="0 0 390 421" aria-hidden="true"><circle cx="34" cy="110" r="34" fill="#fe8069"/><polygon points="51,181 85,160 85,421 51,421" fill="#fdc1cb"/><polygon points="85,160 128,176 128,421 85,421" fill="#005193"/><polygon points="128,111 176,82 176,421 128,421" fill="#fdc1cb"/><polygon points="176,82 232,105 232,421 176,421" fill="#005193"/><polygon points="232,34 288,0 288,421 232,421" fill="#fdc1cb"/><polygon points="288,0 390,40 390,421 288,421" fill="#005193"/></svg>TEWORK</a><p>Temporary Work. Персонал на мероприятия в семи городах.</p></div>
-    <nav class="ftr__nav" aria-label="Разделы внизу"><a href="#o-nas">О нас</a><a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a><a href="#voprosy">Вопросы</a><a href="#kontakty">Контакты</a></nav>
+    <nav class="ftr__nav" aria-label="Разделы внизу"><a href="#o-nas">О компании</a><a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a><a href="#voprosy">Вопросы</a><a href="#kontakty">Контакты</a></nav>
     <div class="ftr__ct"><a class="ftr__tel nums" href="tel:+79166188554">+7 916 618-85-54</a><p><a href="https://t.me/+79166188554" target="_blank" rel="noopener">Telegram</a><a href="https://wa.me/79166188554" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/TeWork_Agency" target="_blank" rel="noopener">Канал</a></p></div>
   </div>
   <div class="wrap ftr__row"><span>TeWork Agency</span><span>© 2026</span></div>
@@ -1062,15 +1093,17 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
     addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
   }
-  // число участников канала вакансий: читаем публичную страницу t.me через r.jina.ai; не вышло — остаётся запасное значение
-  d.querySelectorAll('[data-members]').forEach(function (el) {
-    fetch('https://r.jina.ai/https://t.me/TeWorkAgency', { headers: { 'Accept': 'text/plain' } }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
-      var m = t.match(/(\d[\d\s\u00a0]{2,})\s*(members|участник|subscribers|подписчик)/i);
-      if (!m) return;
-      var n = parseInt(m[1].replace(/\D/g, ''), 10);
-      if (n > 100) el.textContent = n.toLocaleString('ru-RU').replace(/\u00a0/g, ' ');
+  // число участников канала вакансий: сначала members.json (его обновляет GitHub Actions каждые 6 часов), потом публичная страница t.me через r.jina.ai; не вышло — остаётся запасное значение
+  var setMembers = function (n) { if (n > 100) d.querySelectorAll('[data-members]').forEach(function (el) { el.textContent = n.toLocaleString('ru-RU').replace(/ /g, ' '); }); };
+  if (d.querySelector('[data-members]')) {
+    fetch('members.json?t=' + Math.floor(Date.now() / 3600000)).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (j && j.members) { setMembers(j.members); return; }
+      return fetch('https://r.jina.ai/https://t.me/TeWorkAgency', { headers: { 'Accept': 'text/plain' } }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (t) {
+        var m = t.match(/(\d[\d\s ]{2,})\s*(members|участник|subscribers|подписчик)/i);
+        if (m) setMembers(parseInt(m[1].replace(/\D/g, ''), 10));
+      });
     }).catch(function () {});
-  });
+  }
   // шапка
   var hdr = d.getElementById('hdr');
   var onScroll = function () { hdr && hdr.classList.toggle('is-scrolled', scrollY > 30); };

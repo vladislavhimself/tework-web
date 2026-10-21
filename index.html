@@ -619,11 +619,11 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 @media (max-width:860px){.anketa__body{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px}.anketa__stats{grid-template-columns:1fr 1fr}.price .row{padding:.75rem 0}.price__v{font-size:.92rem}}
 /* ===== v4: правки Андрея 07.10 ===== */
 /* значок Telegram в шапке */
-.hdr__tg{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;transition:transform 200ms var(--ease-out)}
-.hdr__tg svg{width:32px;height:32px;display:block}
-@media (hover:hover) and (pointer:fine){.hdr__tg:hover{transform:scale(1.06)}}
+.hdr__tg{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent);transition:transform 200ms var(--ease-out),background-color 200ms ease}
+.hdr__tg svg{width:20px;height:20px;display:block}
+@media (hover:hover) and (pointer:fine){.hdr__tg:hover{background:color-mix(in srgb,var(--ink) 12%,transparent)}}
 .hdr__tg:active{transform:scale(.96)}
-@media (max-width:980px){.hdr__tg{margin-left:auto;width:44px;height:44px}.hdr__tg svg{width:34px;height:34px}.burger{margin-left:4px}}
+@media (max-width:980px){.hdr__tg{margin-left:auto;width:44px;height:44px}.hdr__tg svg{width:22px;height:22px}.burger{margin-left:6px}}
 .menu__tel span{display:flex;gap:.4em}
 .menu__tel span a.menu__tg{font-family:var(--font-text);font-weight:600;font-size:1rem;color:var(--ink);border-bottom:1px solid var(--line-strong)}
 /* о нас */
@@ -669,8 +669,6 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 .ct span:not(.ct__ic){color:var(--ink-soft);font-size:.95rem}
 .ct__ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--pink) 16%,transparent);color:var(--pink)}
 .ct__ic svg{width:22px;height:22px}
-.ct__ic--tg{background:none}
-.ct__ic--tg svg{width:44px;height:44px}
 @media (hover:hover) and (pointer:fine){.ct:hover{border-color:var(--line-strong);background:color-mix(in srgb,var(--ink) 7%,transparent);transform:translateY(-2px)}}
 .ct:active{transform:scale(.98)}
 .cts__note{margin-top:1.4rem;font-size:var(--fs-small);color:var(--ink-mute)}
@@ -729,7 +727,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     <nav class="hdr__nav" aria-label="Разделы">
       <a href="#o-nas">О компании</a><a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a><a href="#kontakty">Контакты</a>
     </nav>
-    <a class="hdr__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2aabee"/><path fill="#fff" d="M5.2 11.7 17.6 6.9c.6-.22 1.12.14.93.98l-2.1 9.9c-.16.72-.6.9-1.2.56l-3.3-2.43-1.6 1.54c-.18.18-.33.33-.67.33l.24-3.38 6.15-5.56c.27-.24-.06-.37-.41-.13l-7.6 4.79-3.27-1.02c-.71-.22-.72-.71.15-1.05z"/></svg></a>
+    <a class="hdr__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.5 3 10.2l7 2.8 2.8 7z"/><path d="M21.5 3.5 10 13"/></svg></a>
     <a class="btn btn--primary btn--sm" href="#zayavka">Подобрать персонал</a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
@@ -1052,7 +1050,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     <div class="wrap">
       <div class="sec__head"><span class="chip">Контакты</span><h2 class="h2">Всегда <em class="hl">на связи</em></h2><p class="lead">Пишите в мессенджер или звоните, номер везде один.</p></div>
       <div class="cts">
-        <a class="ct" href="https://t.me/+79166188554" target="_blank" rel="noopener"><span class="ct__ic ct__ic--tg"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#2aabee"/><path fill="#fff" d="M5.2 11.7 17.6 6.9c.6-.22 1.12.14.93.98l-2.1 9.9c-.16.72-.6.9-1.2.56l-3.3-2.43-1.6 1.54c-.18.18-.33.33-.67.33l.24-3.38 6.15-5.56c.27-.24-.06-.37-.41-.13l-7.6 4.79-3.27-1.02c-.71-.22-.72-.71.15-1.05z"/></svg></span><b>Telegram</b><span class="nums">+7 916 618-85-54</span></a>
+        <a class="ct" href="https://t.me/+79166188554" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.5 3 10.2l7 2.8 2.8 7z"/><path d="M21.5 3.5 10 13"/></svg></span><b>Telegram</b><span class="nums">+7 916 618-85-54</span></a>
         <a class="ct" href="https://wa.me/79166188554" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg></span><b>WhatsApp</b><span class="nums">+7 916 618-85-54</span></a>
         <a class="ct" href="tel:+79166188554"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><b>Позвонить</b><span class="nums">+7 916 618-85-54</span></a>
         <a class="ct" href="https://t.me/TeWork_Agency" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><b>Канал агентства</b><span>проекты и новости</span></a>

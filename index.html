@@ -714,9 +714,13 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 .hdr__tg svg{width:22px;height:22px}
 .ct__ic svg{width:24px;height:24px}
 .ct__ic{background:color-mix(in srgb,var(--pink) 14%,transparent)}
-.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;min-height:clamp(160px,18vw,240px)}
-.why__cell{border:1px dashed var(--line-strong);border-radius:var(--radius);min-height:clamp(140px,16vw,220px)}
-@media (max-width:860px){.why{grid-template-columns:1fr;min-height:0}.why__cell{min-height:90px}}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.why__item{display:grid;gap:.7rem;align-content:start;padding:clamp(20px,2.4vw,30px);border:1px solid var(--line);border-radius:var(--radius);background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.why__n{font-family:var(--font-display);font-weight:800;font-size:1.6rem;color:var(--pink);line-height:1}
+.why__t{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,1.05rem + .8vw,1.75rem);line-height:1.02}
+.why__item p{color:var(--ink-soft);font-size:var(--fs-small);line-height:1.55}
+@media (max-width:980px){.why{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.why{grid-template-columns:1fr;gap:10px}.why__item{padding:16px}}
 .sec--paper{--surface-2:#f7f5f9}
 /*/SITE*/
 </style>
@@ -817,11 +821,18 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     </div>
   </section>
 
-  <!-- ПОЧЕМУ ИМЕННО МЫ: место зарезервировано 22.10 по просьбе владельца, содержание пришлёт позже -->
+  <!-- ПОЧЕМУ ИМЕННО МЫ: тезис владельца 22.10 («ответственный и индивидуальный подход, работаем на результат и качество») развёрнут в факты из фактуры -->
   <section class="sec" id="pochemu" aria-label="Почему именно мы">
     <div class="wrap">
-      <div class="sec__head"><span class="chip">Почему именно мы</span><h2 class="h2">Почему <em class="hl">именно мы</em></h2></div>
-      <div class="why" aria-hidden="true"><div class="why__cell"></div><div class="why__cell"></div><div class="why__cell"></div></div>
+      <div class="sec__head"><span class="chip">Почему именно мы</span><h2 class="h2">Отвечаем за <em class="hl">результат</em></h2><p class="lead">Каждому заказчику свой куратор и команда под задачу. Что это значит на деле:</p></div>
+      <ul class="why">
+        <li class="why__item" data-reveal style="--i:0"><span class="why__n nums">01</span><h3 class="why__t">Куратор ведёт ваш проект от заявки до отчёта</h3><p>Один человек на связи: принимает задачу, собирает команду, отвечает за смену. Не колл-центр и не бот.</p></li>
+        <li class="why__item" data-reveal style="--i:1"><span class="why__n nums">02</span><h3 class="why__t">Команда под ваше мероприятие, а не «кто свободен»</h3><p>Смотрим формат, аудиторию и дресс-код, подбираем людей с опытом на похожих проектах и показываем их вам до старта.</p></li>
+        <li class="why__item" data-reveal style="--i:2"><span class="why__n nums">03</span><h3 class="why__t">Результат проверяется на площадке</h3><p>Супервайзер стоит с командой, следит за внешним видом и пунктуальностью. Если кто-то не вышел, замена в тот же день.</p></li>
+        <li class="why__item" data-reveal style="--i:3"><span class="why__n nums">04</span><h3 class="why__t">Люди возвращаются к нам</h3><p>Платим исполнителям в день работы. Поэтому в базе 2 000+ человек, которые уже работали с нами, а не случайные люди по объявлению.</p></li>
+        <li class="why__item" data-reveal style="--i:4"><span class="why__n nums">05</span><h3 class="why__t">Сроки и условия фиксируем</h3><p>Срочная заявка за 1–2 дня, ставки «от» открыты, точная сумма до начала работы. Работаем по договору.</p></li>
+        <li class="why__item" data-reveal style="--i:5"><span class="why__n nums">06</span><h3 class="why__t">Заказчики приходят снова</h3><p>Rostic’s работает с нами три года, FITmost зовёт на новые проекты. Отзывы заказчиков без правок ниже на странице.</p></li>
+      </ul>
     </div>
   </section>
 

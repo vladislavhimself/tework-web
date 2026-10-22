@@ -18,7 +18,7 @@
 <style>
 /*TOKENS — вписывается scripts/design_tokens.py из DESIGN.md, руками не править*/
 :root{
-  --bg:#07070a; --surface:#111116; --surface-2:#191920; --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.26); --ink:#f5f4f6; --ink-soft:#b3b1ba; --ink-mute:#85838e; --accent:#f6bccb; --accent-ink:#0b0a10; --accent-2:#2a6fd6; --paper:#f4f2f6; --paper-ink:#0b0a10; --paper-soft:#4d4a57;
+  --bg:#07070a; --surface:#111116; --surface-2:#191920; --line:rgba(255,255,255,.1); --line-strong:rgba(255,255,255,.26); --ink:#f5f4f6; --ink-soft:#b3b1ba; --ink-mute:#85838e; --accent:#f6bccb; --accent-ink:#0b0a10; --accent-2:#2a6fd6; --paper:#e9e5ec; --paper-ink:#0b0a10; --paper-soft:#4d4a57;
   --font-display:"Sofia Sans Condensed", system-ui, sans-serif; --font-text:"Manrope", system-ui, sans-serif;
   --font-label:"Manrope", system-ui, sans-serif; --font-accent:"Sofia Sans Condensed", Georgia, serif;
   --display-weight:800; --display-case:uppercase; --display-track:0; --display-leading:0.94;
@@ -611,7 +611,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 /* светлые разрезы: белые секции с розовым акцентом в выделенном слове и кнопке */
 .sec--paper{--paper-accent:#c8284a}
 .sec--paper .step__n{color:var(--ink-mute)}
-.sec--paper .review{background:#fff;border-color:rgba(0,0,0,.08)}
+.sec--paper .review{background:#f3f0f5;border-color:rgba(0,0,0,.07)}
 .sec--paper .tag{border-color:rgba(0,0,0,.14);color:var(--ink-soft)}
 .sec--paper .btn--primary{background:#0b0a10;color:#fff}
 .sec--paper + .sec:not(.sec--paper){border-top:0;padding-top:var(--sec-pad)}
@@ -708,6 +708,16 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 @media (max-width:980px){.values{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:860px){.founder{max-width:none;justify-self:stretch;aspect-ratio:4/5}.about{align-items:start}}
 @media (max-width:560px){.values{grid-template-columns:1fr;gap:10px}.values li{padding:16px}}
+/* ===== v6: чипы без точки, фирменные иконки, резерв «Почему мы», мягкие врезки ===== */
+.chip::before{display:none}
+.chip{padding:.62em 1.05em;border-color:var(--line-strong)}
+.hdr__tg svg{width:22px;height:22px}
+.ct__ic svg{width:24px;height:24px}
+.ct__ic{background:color-mix(in srgb,var(--pink) 14%,transparent)}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;min-height:clamp(160px,18vw,240px)}
+.why__cell{border:1px dashed var(--line-strong);border-radius:var(--radius);min-height:clamp(140px,16vw,220px)}
+@media (max-width:860px){.why{grid-template-columns:1fr;min-height:0}.why__cell{min-height:90px}}
+.sec--paper{--surface-2:#f7f5f9}
 /*/SITE*/
 </style>
 </head>
@@ -727,7 +737,7 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     <nav class="hdr__nav" aria-label="Разделы">
       <a href="#o-nas">О компании</a><a href="#personal">Персонал</a><a href="#ceny">Цены</a><a href="#proekty">Проекты</a><a href="#otzyvy">Отзывы</a><a href="#rabota">Работа у нас</a><a href="#kontakty">Контакты</a>
     </nav>
-    <a class="hdr__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.5 3 10.2l7 2.8 2.8 7z"/><path d="M21.5 3.5 10 13"/></svg></a>
+    <a class="hdr__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
     <a class="btn btn--primary btn--sm" href="#zayavka">Подобрать персонал</a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
   </div>
@@ -804,6 +814,14 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
         <li data-reveal style="--i:4"><b>Честность с исполнителями</b><p>Платим в день работы или на следующее утро. Поэтому люди возвращаются к нам, а не ищут другое агентство.</p></li>
         <li data-reveal style="--i:5"><b>Честность с заказчиком</b><p>Ставки «от» открыты в прайсе, точную сумму называем до начала работы. Работаем по договору.</p></li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ПОЧЕМУ ИМЕННО МЫ: место зарезервировано 22.10 по просьбе владельца, содержание пришлёт позже -->
+  <section class="sec" id="pochemu" aria-label="Почему именно мы">
+    <div class="wrap">
+      <div class="sec__head"><span class="chip">Почему именно мы</span><h2 class="h2">Почему <em class="hl">именно мы</em></h2></div>
+      <div class="why" aria-hidden="true"><div class="why__cell"></div><div class="why__cell"></div><div class="why__cell"></div></div>
     </div>
   </section>
 
@@ -1050,10 +1068,10 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     <div class="wrap">
       <div class="sec__head"><span class="chip">Контакты</span><h2 class="h2">Всегда <em class="hl">на связи</em></h2><p class="lead">Пишите в мессенджер или звоните, номер везде один.</p></div>
       <div class="cts">
-        <a class="ct" href="https://t.me/+79166188554" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 3.5 3 10.2l7 2.8 2.8 7z"/><path d="M21.5 3.5 10 13"/></svg></span><b>Telegram</b><span class="nums">+7 916 618-85-54</span></a>
-        <a class="ct" href="https://wa.me/79166188554" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg></span><b>WhatsApp</b><span class="nums">+7 916 618-85-54</span></a>
+        <a class="ct" href="https://t.me/+79166188554" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span><b>Telegram</b><span class="nums">+7 916 618-85-54</span></a>
+        <a class="ct" href="https://wa.me/79166188554" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><b>WhatsApp</b><span class="nums">+7 916 618-85-54</span></a>
         <a class="ct" href="tel:+79166188554"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><b>Позвонить</b><span class="nums">+7 916 618-85-54</span></a>
-        <a class="ct" href="https://t.me/TeWork_Agency" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><b>Канал агентства</b><span>проекты и новости</span></a>
+        <a class="ct" href="https://t.me/TeWork_Agency" target="_blank" rel="noopener"><span class="ct__ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span><b>Канал агентства</b><span>проекты и новости</span></a>
       </div>
       <p class="cts__note">Ищете подработку? Вакансии каждый день в канале <a href="https://t.me/TeWorkAgency" target="_blank" rel="noopener">@TeWorkAgency</a>.</p>
     </div>

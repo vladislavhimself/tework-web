@@ -724,6 +724,19 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
 .sec--paper{--surface-2:#f7f5f9}
 /*/SITE*/
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113738769', 'ym');
+
+    ym(113738769, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113738769" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body class="js-off">
 
@@ -1215,6 +1228,36 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
     }, { threshold: 0 });
     d.querySelectorAll('main .btn--primary').forEach(function (el) { own.observe(el); });
   }
+})();
+</script>
+<script>
+// Цели Яндекс Метрики (счётчик 113738769): клики по кнопкам и контактам. Имена целей — в настройках счётчика, тип «JavaScript-событие».
+(function () {
+  var send = function (goal, params) { if (typeof ym === 'function') ym(113738769, 'reachGoal', goal, params || {}); };
+  var place = function (el) { var s = el.closest('section, header, footer, .mbar, .menu'); return (s && (s.id || s.className.split(' ')[0])) || 'page'; };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a, button'); if (!a) return;
+    var href = a.getAttribute('href') || '', p = { place: place(a), text: (a.textContent || '').trim().slice(0, 40) };
+    if (a.hasAttribute('data-send')) send('whatsapp_send', p);
+    else if (href.indexOf('wa.me') > -1) send('whatsapp', p);
+    else if (href.indexOf('t.me/+') > -1) send('telegram', p);
+    else if (href.indexOf('t.me/TeWorkAgency') > -1) send('tg_vacancies', p);
+    else if (href.indexOf('t.me/TeWork_Agency') > -1) send('tg_channel', p);
+    else if (href.indexOf('tel:') === 0) send('phone', p);
+    else if (href === '#zayavka') send('cta_zayavka', p);
+    else if (href === '#ceny') send('to_prices', p);
+    else if (a.classList.contains('burger')) send('menu_open', p);
+  }, true);
+  // просмотр ключевых разделов (один раз)
+  if ('IntersectionObserver' in window) {
+    var seen = {};
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting && !seen[en.target.id]) { seen[en.target.id] = 1; send('view_' + en.target.id); io.unobserve(en.target); } }); }, { threshold: 0.4 });
+    ['ceny', 'proekty', 'zayavka', 'kontakty'].forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  }
+  // заполнение заявки: выбрали роль/город/число или ввели текст
+  document.querySelectorAll('[data-picker]').forEach(function (f) {
+    var done = false; f.addEventListener('change', function () { if (!done) { done = true; send('zayavka_fill'); } });
+  });
 })();
 </script>
 </body>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tework.ru/sitemap.xml

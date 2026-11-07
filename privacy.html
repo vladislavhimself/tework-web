@@ -944,7 +944,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
 
   // заявка: чипы собирают текст «Что нужно», форма уходит в Google Таблицу (FORM_URL), мессенджеры — запасной путь
   d.querySelectorAll('[data-picker]').forEach(function (f) {
-    var msg = f.querySelector('[data-msg]'), date = f.querySelector('[data-date]'), contact = f.querySelector('[data-contact]');
+    var msg = f.querySelector('[data-msg]'), date = f.querySelector('[data-date]'), contact = f.querySelector('[data-contact]'), phone = f.querySelector('[data-phone]');
     var status = f.querySelector('[data-status]'), tg = f.querySelector('[data-msg-tg]'), wa = f.querySelector('[data-msg-wa]');
     var edited = false;
     var chips = function () {
@@ -957,7 +957,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
     };
     var build = function () {
       if (msg && !edited) msg.value = chips() ? 'Нужны: ' + chips() + '.' : '';
-      var via = f.querySelector('input[name=via]:checked');
+      var via = f.querySelector('input[name=via]:checked'), v = via ? via.value : '';
       if (contact && via) contact.placeholder = via.getAttribute('data-ph') || '';
       var text = (f.dataset.greet || 'Здравствуйте') + '. ' + (msg && msg.value.trim() ? msg.value.trim() : '') + (date && date.value.trim() ? ' Дата и место: ' + date.value.trim() + '.' : '');
       if (wa) wa.href = 'https://wa.me/' + f.dataset.wa + '?text=' + encodeURIComponent(text);

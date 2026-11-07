@@ -1076,13 +1076,13 @@ body.menu-on .hdr{background:transparent;border-color:transparent;-webkit-backdr
           <input class="picker__in" type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" maxlength="80">
         </fieldset>
         <fieldset><legend>Как с вами связаться</legend><div class="opts">
-          <label class="opt"><input type="radio" name="via" value="Telegram" data-ph="@ник или телефон" checked><span>Telegram</span></label>
-          <label class="opt"><input type="radio" name="via" value="WhatsApp" data-ph="номер телефона"><span>WhatsApp</span></label>
-          <label class="opt"><input type="radio" name="via" value="ВКонтакте" data-ph="ссылка на профиль или телефон"><span>ВКонтакте</span></label>
+          <label class="opt"><input type="radio" name="via" value="Telegram" data-ph="@ник в Telegram" checked><span>Telegram</span></label>
+          <label class="opt"><input type="radio" name="via" value="WhatsApp" data-ph="номер WhatsApp"><span>WhatsApp</span></label>
+          <label class="opt"><input type="radio" name="via" value="ВКонтакте" data-ph="ссылка или ник ВКонтакте"><span>ВКонтакте</span></label>
         </div>
         <div class="picker__row">
-          <input class="picker__in" type="text" name="contact" data-contact placeholder="@ник или телефон" autocomplete="off" maxlength="120" required aria-label="Контакт">
-          <input class="picker__in" type="tel" name="phone" placeholder="Телефон, по желанию" autocomplete="tel" maxlength="30" aria-label="Телефон, по желанию">
+          <input class="picker__in" type="text" name="contact" data-contact placeholder="@ник в Telegram" autocomplete="off" maxlength="120" required aria-label="Контакт">
+          <input class="picker__in" type="tel" name="phone" data-phone placeholder="Телефон, по желанию" autocomplete="tel" maxlength="30" aria-label="Телефон">
         </div></fieldset>
         <input class="hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
         <label class="consent"><input type="checkbox" name="agree" required><span>Согласен на обработку персональных данных по <a href="privacy.html" target="_blank" rel="noopener">политике конфиденциальности</a></span></label>
@@ -1182,7 +1182,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
 
   // заявка: чипы собирают текст «Что нужно», форма уходит в Google Таблицу (FORM_URL), мессенджеры — запасной путь
   d.querySelectorAll('[data-picker]').forEach(function (f) {
-    var msg = f.querySelector('[data-msg]'), date = f.querySelector('[data-date]'), contact = f.querySelector('[data-contact]');
+    var msg = f.querySelector('[data-msg]'), date = f.querySelector('[data-date]'), contact = f.querySelector('[data-contact]'), phone = f.querySelector('[data-phone]');
     var status = f.querySelector('[data-status]'), tg = f.querySelector('[data-msg-tg]'), wa = f.querySelector('[data-msg-wa]');
     var edited = false;
     var chips = function () {
@@ -1195,7 +1195,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
     };
     var build = function () {
       if (msg && !edited) msg.value = chips() ? 'Нужны: ' + chips() + '.' : '';
-      var via = f.querySelector('input[name=via]:checked');
+      var via = f.querySelector('input[name=via]:checked'), v = via ? via.value : '';
       if (contact && via) contact.placeholder = via.getAttribute('data-ph') || '';
       var text = (f.dataset.greet || 'Здравствуйте') + '. ' + (msg && msg.value.trim() ? msg.value.trim() : '') + (date && date.value.trim() ? ' Дата и место: ' + date.value.trim() + '.' : '');
       if (wa) wa.href = 'https://wa.me/' + f.dataset.wa + '?text=' + encodeURIComponent(text);

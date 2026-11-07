@@ -804,6 +804,27 @@ body.modal-on .mbar{display:none}
 @media (max-width:560px){.modal{padding:0;align-items:end}.modal__card{width:100%;max-height:calc(100dvh - 24px);border-radius:calc(var(--radius) + 6px) calc(var(--radius) + 6px) 0 0;padding:22px 18px 28px}.modal__x{top:10px;right:10px}}
 .js-off .modal[hidden]{display:block;position:static;padding:0 var(--gutter) var(--sec-pad)}
 .js-off .modal__bg,.js-off .modal__x{display:none}
+
+/* ===== v17: заявка без чипов, поля с подписями, цвета агентства (розовый, коралл, синий) ===== */
+.modal__card{background:radial-gradient(110% 70% at 100% 0%,color-mix(in srgb,var(--accent-2) 24%,transparent),transparent 58%),radial-gradient(80% 55% at 0% 100%,color-mix(in srgb,var(--accent) 11%,transparent),transparent 62%),var(--surface);border-color:color-mix(in srgb,var(--accent) 30%,var(--line))}
+html[data-direction] .picker--modal{background:none;border:0;padding:0;display:grid;gap:1.15rem}
+.zform__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.95rem 1rem}
+.fld{display:grid;gap:.45rem;min-width:0}
+.fld--full{grid-column:1/-1}
+.fld__l{font-family:var(--font-label);font-size:var(--fs-label);text-transform:var(--label-case);letter-spacing:var(--label-track);color:var(--ink-soft)}
+.fld__in{width:100%;background:color-mix(in srgb,var(--ink) 5%,transparent);border:1px solid color-mix(in srgb,var(--ink) 22%,transparent);border-radius:14px;color:var(--ink);font:inherit;font-size:1rem;padding:.85em 1.05em;outline:0;transition:border-color 160ms ease,box-shadow 160ms ease,background-color 160ms ease}
+.fld__in::placeholder{color:var(--ink-mute)}
+.fld__in:hover{border-color:color-mix(in srgb,var(--ink) 40%,transparent)}
+.fld__in:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.fld__in:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px #1b1b22 inset;-webkit-text-fill-color:var(--ink);caret-color:var(--ink)}
+.fld__ta{min-height:6.6em;resize:vertical;line-height:1.5}
+.fld__hint{font-size:.82rem;color:var(--ink-mute);line-height:1.4;margin:.05rem 0 .25rem}
+.zform .consent{font-size:.88rem}
+.zform .consent input{width:18px;height:18px}
+.btn--wide{width:100%}
+.picker.is-sent .zform__grid{display:none}
+.picker__status.is-err{color:#ffa0a0}
+@media (max-width:560px){.zform__grid{grid-template-columns:1fr;gap:.85rem}}
 /* внутренние страницы */
 .page{padding-top:calc(var(--sec-pad) + 64px)}
 .prose{max-width:74ch;display:grid;gap:1rem;color:var(--ink-soft);line-height:1.65;font-size:1rem;overflow-wrap:anywhere}
@@ -984,50 +1005,36 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
     new IntersectionObserver(function (es) { live = es[0].isIntersecting; if (live) tick(); }).observe(p);
   });
 
-  // заявка: чипы собирают текст «Что нужно», форма уходит в Google Таблицу (FORM_URL), мессенджеры — запасной путь
+  // заявка: форма уходит в Google Таблицу (FORM_URL) + Telegram; ссылки на мессенджеры под формой — запасной путь
   d.querySelectorAll('[data-picker]').forEach(function (f) {
-    var msg = f.querySelector('[data-msg]'), date = f.querySelector('[data-date]'), contact = f.querySelector('[data-contact]'), phone = f.querySelector('[data-phone]');
+    var msg = f.querySelector('[data-msg]'), phone = f.querySelector('[data-phone]');
     var status = f.querySelector('[data-status]'), tg = f.querySelector('[data-msg-tg]'), wa = f.querySelector('[data-msg-wa]');
-    var edited = false;
-    var chips = function () {
-      var parts = [], city = f.querySelector('[data-city]'), other = f.querySelector('[data-other]');
-      if (city) city.hidden = !(other && other.checked);
-      f.querySelectorAll('input[name=r]:checked, input[name=c]:checked, input[name=n]:checked').forEach(function (i) {
-        parts.push(i.hasAttribute('data-other') && city && city.value.trim() ? city.value.trim() : i.value);
-      });
-      return parts.join(', ');
-    };
-    var build = function () {
-      if (msg && !edited) msg.value = chips() ? 'Нужны: ' + chips() + '.' : '';
-      var via = f.querySelector('input[name=via]:checked'), v = via ? via.value : '';
-      if (contact && via) contact.placeholder = via.getAttribute('data-ph') || '';
-      var text = (f.dataset.greet || 'Здравствуйте') + '. ' + (msg && msg.value.trim() ? msg.value.trim() : '') + (date && date.value.trim() ? ' Дата и место: ' + date.value.trim() + '.' : '');
+    var say = function (t, err) { if (status) { status.textContent = t; status.classList.toggle('is-err', !!err); } };
+    var get = function (n) { var el = f.querySelector('[name=' + n + ']'); return el ? el.value.trim() : ''; };
+    var links = function () {
+      var text = (f.dataset.greet || 'Здравствуйте') + (msg && msg.value.trim() ? '. ' + msg.value.trim() : '');
       if (wa) wa.href = 'https://wa.me/' + f.dataset.wa + '?text=' + encodeURIComponent(text);
       if (tg) tg.href = 'https://t.me/+' + f.dataset.tgphone + '?text=' + encodeURIComponent(text);
     };
-    if (msg) msg.addEventListener('input', function () { edited = msg.value.trim() !== ''; if (!edited) build(); });
-    f.addEventListener('change', function (e) { build(); var c = f.querySelector('[data-city]'); if (e.target.hasAttribute && e.target.hasAttribute('data-other') && c) c.focus(); });
-    f.addEventListener('input', function (e) { if (e.target !== msg) build(); });
-    build();
-    var say = function (t, err) { if (status) { status.textContent = t; status.classList.toggle('is-err', !!err); } };
+    f.addEventListener('input', function () { links(); say(''); }); links();
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var hp = f.querySelector('.hp'); if (hp && hp.value) return;
-      if (!f.checkValidity()) {
-        var bad = f.querySelector(':invalid');
-        say(bad && bad.name === 'agree' ? 'Отметьте согласие на обработку данных.' : 'Укажите, как с вами связаться.', true);
-        if (bad) bad.focus();
-        return;
+      var bad = null, why = '';
+      if (!get('name')) { bad = f.querySelector('[name=name]'); why = 'Напишите, как к вам обращаться.'; }
+      else if (!get('phone') && !get('telegram')) { bad = phone; why = 'Оставьте телефон или ник в Telegram, чтобы мы могли ответить.'; }
+      else if (!f.checkValidity()) {
+        bad = f.querySelector(':invalid');
+        why = bad && bad.name === 'agree' ? 'Отметьте согласие на обработку данных.' : bad && bad.name === 'email' ? 'Проверьте адрес почты.' : 'Проверьте поля формы.';
       }
-      var get = function (n) { var el = f.querySelector('[name=' + n + ']'); return el ? el.value.trim() : ''; };
-      var via = f.querySelector('input[name=via]:checked');
-      var data = { name: get('name'), via: via ? via.value : '', contact: get('contact'), phone: get('phone'), msg: get('msg'), date: get('d'), source: 'форма', page: location.href };
+      if (why) { say(why, true); if (bad) bad.focus(); return; }
+      var data = { name: get('name'), phone: get('phone'), email: get('email'), telegram: get('telegram'), msg: get('msg'), source: 'форма', page: location.href };
       var btn = f.querySelector('[type=submit]'); if (btn) btn.disabled = true;
       say('Отправляем…');
       var req = FORM_URL ? fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }) : Promise.reject(new Error('no FORM_URL'));
       req.then(function () {
         f.classList.add('is-sent'); say('');
-        if (typeof ym === 'function') ym(113738769, 'reachGoal', 'lead_form', { via: data.via });
+        if (typeof ym === 'function') ym(113738769, 'reachGoal', 'lead_form', { via: data.telegram ? 'telegram' : 'phone' });
       }).catch(function () {
         if (btn) btn.disabled = false;
         say('Не получилось отправить. Напишите нам в Telegram или WhatsApp, ссылки ниже.', true);

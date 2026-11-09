@@ -829,6 +829,27 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 /* ===== v18: заголовок первого экрана — три строки на десктопе, четыре на телефоне ===== */
 .hero__title{font-size:clamp(2.6rem,5.2vw,4.6rem)}
 @media (max-width:860px){.hero__title{font-size:clamp(2.4rem,10.5vw,3.6rem)}}
+
+/* ===== v19: контакты без плашек — номер, две кнопки, строка с почтой и каналом ===== */
+.duo--contact{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center}
+.contact{display:grid;gap:clamp(18px,2.4vw,28px);justify-items:start}
+.contact__tel{font-family:var(--font-display);font-weight:800;font-size:clamp(2.4rem,1.4rem + 3.6vw,4.8rem);line-height:1;letter-spacing:.01em;color:var(--ink);border-bottom:2px solid transparent;transition:border-color 200ms ease}
+.contact__tel:hover{border-color:var(--accent)}
+.contact__btns .btn svg{width:20px;height:20px}
+.contact__more{font-size:var(--fs-small);color:var(--ink-mute);line-height:1.7}
+.contact__more a{color:var(--ink);border-bottom:1px solid var(--line-strong)}
+@media (max-width:860px){.duo--contact{grid-template-columns:1fr}.contact__btns{width:100%}.contact__btns .btn{flex:1 1 220px}}
+
+/* ===== v20: первый экран выше и крупнее; согласие строкой; экран «Заявка отправлена» ===== */
+@media (min-width:861px){.hero--split .hero__in{grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);align-self:start;align-items:start;padding-block:150px 64px}.hero__title{font-size:clamp(2.6rem,5.7vw,5rem)}}
+.hero__text .lead{font-size:1.15rem;max-width:56ch}
+.zform__legal{font-size:.8rem;color:var(--ink-mute);line-height:1.45;margin-top:-.35rem}
+.zform__legal a{color:inherit;border-bottom:1px solid var(--line-strong)}
+.picker.is-sent .zform__legal{display:none}
+.modal.is-sent .modal__head{display:none}
+.picker__done{gap:.9rem;padding:.4rem 0 .6rem}
+.picker__done-t{font-size:clamp(2rem,1.4rem + 2vw,3.2rem)}
+@media (max-width:860px){.hero--split .hero__in{padding-block:104px 44px}}
 /* внутренние страницы */
 .page{padding-top:calc(var(--sec-pad) + 64px)}
 .prose{max-width:74ch;display:grid;gap:1rem;color:var(--ink-soft);line-height:1.65;font-size:1rem;overflow-wrap:anywhere}
@@ -961,7 +982,11 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
   if (modal) {
     var card = modal.querySelector('.modal__card'), last = null;
     var openM = function () { last = d.activeElement; modal.hidden = false; b.classList.add('modal-on'); card.scrollTop = 0; card.focus({ preventScroll: true }); };
-    var closeM = function () { modal.hidden = true; b.classList.remove('modal-on'); if (last && last.focus) last.focus(); };
+    var closeM = function () {
+      modal.hidden = true; b.classList.remove('modal-on'); if (last && last.focus) last.focus();
+      var f = modal.querySelector('[data-picker].is-sent');
+      if (f) { f.reset(); f.classList.remove('is-sent'); modal.classList.remove('is-sent'); var sb = f.querySelector('[type=submit]'); if (sb) sb.disabled = false; }
+    };
     d.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href="#zayavka"]');
       if (a) { e.preventDefault(); if (typeof setMenu === 'function' && menu && !menu.hidden) setMenu(false); openM(); return; }
@@ -1029,7 +1054,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
       else if (!get('phone') && !get('telegram')) { bad = phone; why = 'Оставьте телефон или ник в Telegram, чтобы мы могли ответить.'; }
       else if (!f.checkValidity()) {
         bad = f.querySelector(':invalid');
-        why = bad && bad.name === 'agree' ? 'Отметьте согласие на обработку данных.' : bad && bad.name === 'email' ? 'Проверьте адрес почты.' : 'Проверьте поля формы.';
+        why = bad && bad.name === 'email' ? 'Проверьте адрес почты.' : 'Проверьте поля формы.';
       }
       if (why) { say(why, true); if (bad) bad.focus(); return; }
       var data = { name: get('name'), phone: get('phone'), email: get('email'), telegram: get('telegram'), msg: get('msg'), source: 'форма', page: location.href };
@@ -1038,6 +1063,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
       var req = FORM_URL ? fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }) : Promise.reject(new Error('no FORM_URL'));
       req.then(function () {
         f.classList.add('is-sent'); say('');
+        var m = f.closest('.modal'); if (m) { m.classList.add('is-sent'); if (typeof closeM === 'function') setTimeout(function () { if (!m.hidden) closeM(); }, 5000); }
         if (typeof ym === 'function') ym(113738769, 'reachGoal', 'lead_form', { via: data.telegram ? 'telegram' : 'phone' });
       }).catch(function () {
         if (btn) btn.disabled = false;

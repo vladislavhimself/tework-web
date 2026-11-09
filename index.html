@@ -825,6 +825,10 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 .picker.is-sent .zform__grid{display:none}
 .picker__status.is-err{color:#ffa0a0}
 @media (max-width:560px){.zform__grid{grid-template-columns:1fr;gap:.85rem}}
+
+/* ===== v18: заголовок первого экрана — три строки на десктопе, четыре на телефоне ===== */
+.hero__title{font-size:clamp(2.6rem,5.2vw,4.6rem)}
+@media (max-width:860px){.hero__title{font-size:clamp(2.4rem,10.5vw,3.6rem)}}
 /*/SITE*/
 </style>
 <!-- Yandex.Metrika counter -->
@@ -867,7 +871,7 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 </header>
 <nav class="menu" id="menu" aria-label="Меню" hidden>
   <div class="menu__in">
-    <a style="--i:0" href="#pochemu">Почему TeWork</a><a style="--i:1" href="#proekty">Проекты</a><a style="--i:2" href="#kak">Как работаем</a><a style="--i:3" href="#personal">Роли и ставки</a><a style="--i:4" href="#otzyvy">Отзывы</a><a style="--i:5" href="#o-nas">О нас</a><a style="--i:6" href="#voprosy">Вопросы</a><a style="--i:7" href="#kontakty">Контакты</a>
+    <a style="--i:0" href="#pochemu">Почему TeWork</a><a style="--i:1" href="#proekty">Проекты</a><a style="--i:2" href="#kak">Как работаем</a><a style="--i:3" href="#personal">Роли и ставки</a><a style="--i:4" href="#otzyvy">Отзывы</a><a style="--i:5" href="#o-nas">О нас</a><a style="--i:6" href="#kontakty">Контакты</a>
     <a class="btn btn--ghost menu__cta" href="#zayavka">Подобрать персонал</a>
     <p class="menu__tel"><a href="tel:+79166188554">+7 916 618-85-54</a><span><a class="menu__tg" href="https://t.me/+79166188554" target="_blank" rel="noopener">Telegram</a> · <a class="menu__tg" href="https://wa.me/79166188554" target="_blank" rel="noopener">WhatsApp</a></span></p>
   </div>
@@ -1081,20 +1085,6 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
   </section>
 
   <!-- КОМАНДА: после отзывов (07.11) -->
-  <!-- ВОПРОСЫ -->
-  <section class="sec" id="voprosy" aria-label="Вопросы">
-    <div class="wrap faq">
-      <div class="sec__head" style="margin:0"><span class="chip">Вопросы</span><h2 class="h2">Что спрашивают <em class="hl">заказчики</em></h2></div>
-      <div class="faq__list">
-        <div class="qa"><button class="qa__q" type="button" aria-expanded="false">Сколько стоит персонал на мероприятие?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Ставки «от» за час есть <a href="#personal">в разделе «Роли и ставки»</a>: хостес от 1 000 ₽, промо-персонал от 900 ₽, хелперы от 800 ₽, координатор от 1 000 ₽. Остальные роли считаем по запросу. Итог зависит от города и графика смен, точную сумму называем до начала работы.</p></div></div></div>
-        <div class="qa"><button class="qa__q" type="button" aria-expanded="false">За сколько вы найдёте промоутеров или хостес?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Презентацию кандидатов присылаем за 1–2 дня. Чем раньше напишете, тем больше выбор людей.</p></div></div></div>
-        <div class="qa"><button class="qa__q" type="button" aria-expanded="false">Что если человек не выйдет на смену?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>Ставим замену из той же презентации в день смены. Супервайзер на площадке решает это сам, вам не нужно никого искать.</p></div></div></div>
-        <div class="qa"><button class="qa__q" type="button" aria-expanded="false">В каких городах вы подбираете персонал?<span class="qa__icon" aria-hidden="true"></span></button><div class="qa__a"><div><p>В семи городах: Москва, Санкт-Петербург, Сочи, Казань, Самара, Калининград и Тверь.</p></div></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ЗАЯВКА: форма — основной способ связи (07.11), уходит в Google Таблицу через Apps Script (apps-script.gs, README-zayavka.md); мессенджеры — текстовые ссылки под формой -->
   <!-- КОНТАКТЫ: просьба Андрея 07.10. Почта и ВКонтакте появятся, когда будут адреса -->
   <section class="sec" id="kontakty" aria-label="Контакты">
     <div class="wrap">
@@ -1114,7 +1104,7 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 <footer class="ftr">
   <div class="wrap ftr__top">
     <div class="ftr__brand"><a class="ftr__logo" href="#top" aria-label="TeWork Agency, наверх"><svg viewBox="0 0 390 421" aria-hidden="true"><circle cx="34" cy="110" r="34" fill="#fe8069"/><polygon points="51,181 85,160 85,421 51,421" fill="#fdc1cb"/><polygon points="85,160 128,176 128,421 85,421" fill="#005193"/><polygon points="128,111 176,82 176,421 128,421" fill="#fdc1cb"/><polygon points="176,82 232,105 232,421 176,421" fill="#005193"/><polygon points="232,34 288,0 288,421 232,421" fill="#fdc1cb"/><polygon points="288,0 390,40 390,421 288,421" fill="#005193"/></svg>TEWORK</a><p>Агентство событийного персонала: промоутеры, хостес, хелперы, промо-модели, ведущие и супервайзеры на мероприятия в Москве, Санкт-Петербурге, Сочи, Казани, Самаре, Калининграде и Твери.</p></div>
-    <nav class="ftr__nav" aria-label="Разделы внизу"><a href="#pochemu">Почему TeWork</a><a href="#proekty">Проекты</a><a href="#kak">Как работаем</a><a href="#personal">Роли и ставки</a><a href="#otzyvy">Отзывы</a><a href="#o-nas">О нас</a><a href="#voprosy">Вопросы</a><a href="#kontakty">Контакты</a></nav>
+    <nav class="ftr__nav" aria-label="Разделы внизу"><a href="#pochemu">Почему TeWork</a><a href="#proekty">Проекты</a><a href="#kak">Как работаем</a><a href="#personal">Роли и ставки</a><a href="#otzyvy">Отзывы</a><a href="#o-nas">О нас</a><a href="#kontakty">Контакты</a></nav>
     <div class="ftr__ct"><a class="ftr__tel nums" href="tel:+79166188554">+7 916 618-85-54</a><p><a href="https://t.me/+79166188554" target="_blank" rel="noopener">Telegram</a><a href="https://wa.me/79166188554" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/TeWork_Agency" target="_blank" rel="noopener">Канал</a></p><p class="ftr__mail">Партнёрства и предложения: <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a></p></div>
   </div>
   <div class="wrap ftr__row"><span>Афонин Андрей Аркадьевич, плательщик налога на профессиональный доход, ИНН 770171355960</span><span><a class="ftr__pol" href="privacy.html">Политика конфиденциальности</a></span><span>© TeWork Agency, 2023–2026</span></div>

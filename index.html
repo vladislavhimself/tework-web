@@ -850,6 +850,10 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 .picker__done{gap:.9rem;padding:.4rem 0 .6rem}
 .picker__done-t{font-size:clamp(2rem,1.4rem + 2vw,3.2rem)}
 @media (max-width:860px){.hero--split .hero__in{padding-block:104px 44px}}
+
+/* ===== v21: первый экран — по центру по высоте, заголовок в четыре строки крупнее ===== */
+@media (min-width:861px){.hero--split .hero__in{align-self:center;align-items:center;padding-block:112px 64px}.hero__title{font-size:clamp(2.6rem,6.4vw,5.75rem)}}
+@media (max-width:860px){.hero__text .lead{font-size:1rem}}
 /*/SITE*/
 </style>
 <!-- Yandex.Metrika counter -->
@@ -905,7 +909,7 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
     <div class="wrap hero__in">
       <div class="hero__text">
         <span class="chip">Агентство событийного персонала<span class="chip__x"> · 7 городов</span></span>
-        <h1 class="h1 hero__title" style="margin-top:1.4rem"><span class="line"><span style="--i:0">Персонал, который</span></span><span class="line"><span style="--i:1">отработает ваше</span></span><span class="line"><span style="--i:2">мероприятие <em class="hl">как своё</em></span></span></h1>
+        <h1 class="h1 hero__title" style="margin-top:1.4rem"><span class="line"><span style="--i:0">Персонал, который</span></span><span class="line"><span style="--i:1">отработает ваше</span></span><span class="line"><span style="--i:2">мероприятие</span></span><span class="line"><span style="--i:3"><em class="hl">как своё</em></span></span></h1>
         <p class="lead">Хостес, промоутеры, хелперы и промо-модели в Москве и ещё шести городах. Каждого видели в деле на своих проектах. Вы выбираете по анкетам, мы отвечаем за выход и ставим замену в день смены.</p>
       </div>
       <div class="hero__side">

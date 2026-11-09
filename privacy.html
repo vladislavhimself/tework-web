@@ -850,6 +850,10 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 .picker__done{gap:.9rem;padding:.4rem 0 .6rem}
 .picker__done-t{font-size:clamp(2rem,1.4rem + 2vw,3.2rem)}
 @media (max-width:860px){.hero--split .hero__in{padding-block:104px 44px}}
+
+/* ===== v21: первый экран — по центру по высоте, заголовок в четыре строки крупнее ===== */
+@media (min-width:861px){.hero--split .hero__in{align-self:center;align-items:center;padding-block:112px 64px}.hero__title{font-size:clamp(2.6rem,6.4vw,5.75rem)}}
+@media (max-width:860px){.hero__text .lead{font-size:1rem}}
 /* внутренние страницы */
 .page{padding-top:calc(var(--sec-pad) + 64px)}
 .prose{max-width:74ch;display:grid;gap:1rem;color:var(--ink-soft);line-height:1.65;font-size:1rem;overflow-wrap:anywhere}

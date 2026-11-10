@@ -1164,7 +1164,7 @@ body.modal-on .ck,.menu.on~.ck{display:none}
   <a class="btn btn--primary btn--sm" href="#zayavka" tabindex="-1">Подобрать</a>
 </div>
 
-<!-- ЗАЯВКА: всплывающее окно, открывают все ссылки href="#zayavka"; данные уходят в Google Таблицу + Telegram (apps-script.gs) -->
+<!-- ЗАЯВКА: всплывающее окно, открывают все ссылки href="#zayavka"; данные уходят в функцию Yandex Cloud (база в России), оттуда копия в Google Таблицу + Telegram -->
 <div class="modal" id="zayavka" hidden>
   <div class="modal__bg" data-modal-close></div>
   <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="zayavka-t" tabindex="-1">
@@ -1190,8 +1190,8 @@ body.modal-on .ck,.menu.on~.ck{display:none}
 </div>
 
 <script>
-// URL веб-приложения Google Apps Script — вставить после деплоя (см. README-zayavka.md)
-var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwpYTf2EhF73vLhx8MKwh3AwbPenHYJmkwsFBDIHEyIkQ/exec';
+// Адрес функции в Yandex Cloud: она пишет заявку в базу в России и передаёт копию в Google Таблицу + Telegram (см. README-zayavka.md)
+var FORM_URL = 'https://functions.yandexcloud.net/d4ec2fcqd284ucferl8n';
 (function () {
   var d = document, b = d.body, rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   b.classList.remove('js-off');
@@ -1272,7 +1272,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
     new IntersectionObserver(function (es) { live = es[0].isIntersecting; if (live) tick(); }).observe(p);
   });
 
-  // заявка: форма уходит в Google Таблицу (FORM_URL) + Telegram; ссылки на мессенджеры под формой — запасной путь
+  // заявка: форма уходит в функцию Yandex Cloud (FORM_URL), та пишет в базу и шлёт копию в Google Таблицу + Telegram; ссылки на мессенджеры под формой — запасной путь
   d.querySelectorAll('[data-picker]').forEach(function (f) {
     var msg = f.querySelector('[data-msg]'), phone = f.querySelector('[data-phone]');
     var status = f.querySelector('[data-status]'), tg = f.querySelector('[data-msg-tg]'), wa = f.querySelector('[data-msg-wa]');
@@ -1298,7 +1298,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
       var data = { name: get('name'), phone: get('phone'), email: get('email'), telegram: get('telegram'), msg: get('msg'), source: 'форма', page: location.href, consent: 'галочка на сайте, ' + new Date().toISOString() };
       var btn = f.querySelector('[type=submit]'); if (btn) btn.disabled = true;
       say('Отправляем…');
-      var req = FORM_URL ? fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }) : Promise.reject(new Error('no FORM_URL'));
+      var req = FORM_URL ? fetch(FORM_URL, { method: 'POST', body: JSON.stringify(data) }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r; }) : Promise.reject(new Error('no FORM_URL'));
       req.then(function () {
         f.classList.add('is-sent'); say('');
         var m = f.closest('.modal'); if (m) { m.classList.add('is-sent'); var mc = m.querySelector('.modal__card'), ae = d.activeElement; if (ae && ae !== d.body && ae.blur) ae.blur(); if (mc) { mc.scrollTop = 0; mc.focus({ preventScroll: true }); } if (typeof fitM === 'function') setTimeout(function () { if (m.classList.contains('is-sent')) { m.classList.add('is-settled'); fitM(); } }, 450); if (typeof closeM === 'function') setTimeout(function () { if (!m.hidden) closeM(); }, 5000); }

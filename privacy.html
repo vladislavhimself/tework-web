@@ -865,16 +865,18 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 .zform__legal{margin-top:-.2rem}
 @media (min-width:561px) and (max-height:960px){.zform .fld__ta{min-height:0;height:5.2em}}
 
-/* ===== v26: плашка про cookie (появляется через 2 минуты на сайте) ===== */
-.ck{position:fixed;left:16px;bottom:16px;z-index:50;width:min(400px,calc(100vw - 32px));display:grid;gap:14px;justify-items:start;padding:20px 56px 20px 22px;border-radius:var(--radius);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line-strong));background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--accent-2) 22%,transparent),transparent 60%),color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.5);opacity:0;translate:0 18px;transition:opacity 300ms ease,translate 420ms var(--ease-drawer)}
+/* ===== v28: плашка про cookie (сразу, низкая полоска внизу) ===== */
+.ck{position:fixed;left:16px;bottom:16px;z-index:50;max-width:min(560px,calc(100vw - 32px));display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;border-radius:var(--radius);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line-strong));background:radial-gradient(120% 140% at 100% 0%,color-mix(in srgb,var(--accent-2) 22%,transparent),transparent 60%),color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 14px 40px rgba(0,0,0,.45);opacity:0;translate:0 14px;transition:opacity 300ms ease,translate 420ms var(--ease-drawer),bottom 300ms ease}
 .ck.is-on{opacity:1;translate:0 0}
-.ck__t{font-size:.9rem;line-height:1.5;color:var(--ink-soft);max-width:none}
-.ck__t a{color:var(--ink);border-bottom:1px solid var(--line-strong)}
-.ck__ok{--h:42px;font-size:.9rem;padding:0 1.5em}
-.ck__x{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);display:grid;place-items:center;cursor:pointer}
-.ck__x svg{width:13px;height:13px}
+.ck__t{flex:1;min-width:0;margin:0;font-size:.84rem;line-height:1.4;color:var(--ink-soft);max-width:none}
+.ck__t a{color:var(--ink);border-bottom:1px solid var(--line-strong);white-space:nowrap}
+.ck__ok{--h:38px;flex:none;font-size:.86rem;padding:0 1.25em}
+.ck__x{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.ck__x svg{width:12px;height:12px}
 body.modal-on .ck,.menu.on~.ck{display:none}
-@media (max-width:860px){.ck{left:12px;right:12px;width:auto;bottom:calc(76px + env(safe-area-inset-bottom) + 10px)}}
+@media (max-width:860px){.ck{left:12px;right:12px;max-width:none;gap:10px;padding:8px 8px 8px 14px;bottom:calc(12px + env(safe-area-inset-bottom))}
+  .mbar.is-on~.ck{bottom:calc(76px + env(safe-area-inset-bottom) + 10px)}
+  .ck__t{font-size:.8rem;line-height:1.35}.ck__more{display:none}.ck__ok{--h:36px;padding:0 1.1em}}
 @media (prefers-reduced-motion:reduce){.ck{transition:none}}
 /* внутренние страницы */
 .page{padding-top:calc(var(--sec-pad) + 64px)}
@@ -1185,21 +1187,18 @@ var FORM_URL = 'https://functions.yandexcloud.net/d4ec2fcqd284ucferl8n';
 })();
 </script>
 <script>
-// Плашка про cookie: показываем, когда человек провёл на сайте 2 минуты (время идёт с первой открытой страницы и копится между страницами).
-// «Принять» или крестик прячут её насовсем (localStorage). Пока открыто окно заявки, не показываем: ждём, когда закроют.
+// Плашка про cookie: показываем сразу после загрузки страницы, низкой полоской внизу.
+// «Принять» или крестик прячут её насовсем (localStorage). Пока открыто окно заявки, она спрятана.
 (function () {
-  var KEY = 'tw_cookie', T0 = 'tw_t0', WAIT = 120000;
+  var KEY = 'tw_cookie';
   var get = function (st, k) { try { return window[st].getItem(k); } catch (e) { return null; } };
   var set = function (st, k, v) { try { window[st].setItem(k, v); } catch (e) {} };
   if (get('localStorage', KEY)) return;
-  var t0 = +get('sessionStorage', T0);
-  if (!t0) { t0 = Date.now(); set('sessionStorage', T0, String(t0)); }
   var show = function () {
     if (get('localStorage', KEY)) return;
-    if (document.body.classList.contains('modal-on')) { setTimeout(show, 3000); return; }
     var el = document.createElement('div');
     el.className = 'ck'; el.setAttribute('role', 'region'); el.setAttribute('aria-label', 'Файлы cookie');
-    el.innerHTML = '<p class="ck__t">Мы используем cookie и Яндекс Метрику, чтобы видеть, что на сайте удобно, а что стоит поправить. <a href="privacy.html#cookie">Подробнее</a></p>' +
+    el.innerHTML = '<p class="ck__t">Мы используем cookie и Яндекс Метрику<span class="ck__more">, чтобы делать сайт удобнее</span>. <a href="privacy.html#cookie">Подробнее</a></p>' +
       '<button class="btn btn--primary ck__ok" type="button">Принять</button>' +
       '<button class="ck__x" type="button" aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>';
     document.body.appendChild(el);
@@ -1211,7 +1210,7 @@ var FORM_URL = 'https://functions.yandexcloud.net/d4ec2fcqd284ucferl8n';
     el.querySelector('.ck__ok').addEventListener('click', function () { hide('принято'); });
     el.querySelector('.ck__x').addEventListener('click', function () { hide('закрыто'); });
   };
-  setTimeout(show, Math.max(0, WAIT - (Date.now() - t0)));
+  setTimeout(show, 600);
 })();
 </script>
 </body>

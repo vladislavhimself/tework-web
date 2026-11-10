@@ -863,9 +863,19 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 /* ===== v25: галочка согласия, строка про cookie в подвале ===== */
 .zform .consent{margin-top:.1rem}
 .zform__legal{margin-top:-.2rem}
-.ftr__cookie{font-size:.78rem;line-height:1.5;color:var(--ink-mute);margin-top:1rem;max-width:none}
-.ftr__cookie a{color:inherit;border-bottom:1px solid var(--line-strong)}
 @media (min-width:561px) and (max-height:960px){.zform .fld__ta{min-height:0;height:5.2em}}
+
+/* ===== v26: плашка про cookie (появляется через 2 минуты на сайте) ===== */
+.ck{position:fixed;left:16px;bottom:16px;z-index:50;width:min(400px,calc(100vw - 32px));display:grid;gap:14px;justify-items:start;padding:20px 56px 20px 22px;border-radius:var(--radius);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line-strong));background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--accent-2) 22%,transparent),transparent 60%),color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.5);opacity:0;translate:0 18px;transition:opacity 300ms ease,translate 420ms var(--ease-drawer)}
+.ck.is-on{opacity:1;translate:0 0}
+.ck__t{font-size:.9rem;line-height:1.5;color:var(--ink-soft);max-width:none}
+.ck__t a{color:var(--ink);border-bottom:1px solid var(--line-strong)}
+.ck__ok{--h:42px;font-size:.9rem;padding:0 1.5em}
+.ck__x{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.ck__x svg{width:13px;height:13px}
+body.modal-on .ck,.menu.on~.ck{display:none}
+@media (max-width:860px){.ck{left:12px;right:12px;width:auto;bottom:calc(76px + env(safe-area-inset-bottom) + 10px)}}
+@media (prefers-reduced-motion:reduce){.ck{transition:none}}
 /*/SITE*/
 </style>
 <!-- Yandex.Metrika counter -->
@@ -1146,7 +1156,6 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
     <div class="ftr__ct"><a class="ftr__tel nums" href="tel:+79166188554">+7 916 618-85-54</a><p><a href="https://t.me/+79166188554" target="_blank" rel="noopener">Telegram</a><a href="https://wa.me/79166188554" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/TeWork_Agency" target="_blank" rel="noopener">Канал</a></p><p class="ftr__mail">Партнёрства и предложения: <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a></p></div>
   </div>
   <div class="wrap ftr__row"><span>Афонин Андрей Аркадьевич, плательщик налога на профессиональный доход, ИНН 770171355960</span><span><a class="ftr__pol" href="privacy.html">Политика конфиденциальности</a> · <a class="ftr__pol" href="soglasie.html">Согласие на обработку данных</a></span><span>© TeWork Agency, 2023–2026</span></div>
-  <div class="wrap"><p class="ftr__cookie">Сайт использует файлы cookie и сервис «Яндекс Метрика» с записью действий на страницах, чтобы считать посещения и улучшать сайт. Оставаясь на сайте, вы соглашаетесь с этим. Подробнее: <a href="privacy.html#cookie">политика конфиденциальности</a>.</p></div>
   <div class="ftr__word" aria-hidden="true">TEWORK</div>
 </footer>
 
@@ -1369,6 +1378,36 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
   document.querySelectorAll('[data-picker]').forEach(function (f) {
     var done = false; f.addEventListener('change', function () { if (!done) { done = true; send('zayavka_fill'); } });
   });
+})();
+</script>
+<script>
+// Плашка про cookie: показываем, когда человек провёл на сайте 2 минуты (время идёт с первой открытой страницы и копится между страницами).
+// «Принять» или крестик прячут её насовсем (localStorage). Пока открыто окно заявки, не показываем: ждём, когда закроют.
+(function () {
+  var KEY = 'tw_cookie', T0 = 'tw_t0', WAIT = 120000;
+  var get = function (st, k) { try { return window[st].getItem(k); } catch (e) { return null; } };
+  var set = function (st, k, v) { try { window[st].setItem(k, v); } catch (e) {} };
+  if (get('localStorage', KEY)) return;
+  var t0 = +get('sessionStorage', T0);
+  if (!t0) { t0 = Date.now(); set('sessionStorage', T0, String(t0)); }
+  var show = function () {
+    if (get('localStorage', KEY)) return;
+    if (document.body.classList.contains('modal-on')) { setTimeout(show, 3000); return; }
+    var el = document.createElement('div');
+    el.className = 'ck'; el.setAttribute('role', 'region'); el.setAttribute('aria-label', 'Файлы cookie');
+    el.innerHTML = '<p class="ck__t">Мы используем cookie и Яндекс Метрику, чтобы видеть, что на сайте удобно, а что стоит поправить. <a href="privacy.html#cookie">Подробнее</a></p>' +
+      '<button class="btn btn--primary ck__ok" type="button">Принять</button>' +
+      '<button class="ck__x" type="button" aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>';
+    document.body.appendChild(el);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('is-on'); }); });
+    var hide = function (how) {
+      set('localStorage', KEY, how + ' ' + new Date().toISOString());
+      el.classList.remove('is-on'); setTimeout(function () { el.remove(); }, 450);
+    };
+    el.querySelector('.ck__ok').addEventListener('click', function () { hide('принято'); });
+    el.querySelector('.ck__x').addEventListener('click', function () { hide('закрыто'); });
+  };
+  setTimeout(show, Math.max(0, WAIT - (Date.now() - t0)));
 })();
 </script>
 </body>

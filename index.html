@@ -1193,20 +1193,19 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
   var modal = d.getElementById('zayavka');
   if (modal) {
     var card = modal.querySelector('.modal__card'), last = null;
-    // phones: keep the window inside the visible part of the screen (above the on-screen keyboard)
+    // phones: only the 'sent' screen is fitted to the visible part of the screen; the form itself is never moved while typing
     var vv = window.visualViewport;
-    var fit = function () {
-      if (!vv || modal.hidden) return;
-      var st = modal.style;
-      if (vv.scale > 1.01) { st.top = st.bottom = st.height = ''; st.removeProperty('--vvh'); return; }
+    var fitM = function () {
+      var st = modal.style, on = vv && !modal.hidden && vv.scale <= 1.01 && modal.classList.contains('is-sent') && modal.classList.contains('is-settled');
+      if (!on) { if (st.height) { st.top = st.bottom = st.height = ''; st.removeProperty('--vvh'); } return; }
       st.top = vv.offsetTop + 'px'; st.bottom = 'auto'; st.height = vv.height + 'px'; st.setProperty('--vvh', vv.height + 'px');
     };
-    if (vv) { vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit); }
-    var openM = function () { last = d.activeElement; modal.hidden = false; b.classList.add('modal-on'); card.scrollTop = 0; card.focus({ preventScroll: true }); fit(); };
+    if (vv) { vv.addEventListener('resize', fitM); vv.addEventListener('scroll', fitM); }
+    var openM = function () { last = d.activeElement; modal.hidden = false; b.classList.add('modal-on'); card.scrollTop = 0; card.focus({ preventScroll: true }); fitM(); };
     var closeM = function () {
       modal.hidden = true; b.classList.remove('modal-on'); if (last && last.focus) last.focus();
       var f = modal.querySelector('[data-picker].is-sent');
-      if (f) { f.reset(); f.classList.remove('is-sent'); modal.classList.remove('is-sent'); var sb = f.querySelector('[type=submit]'); if (sb) sb.disabled = false; }
+      if (f) { f.reset(); f.classList.remove('is-sent'); modal.classList.remove('is-sent', 'is-settled'); var sb = f.querySelector('[type=submit]'); if (sb) sb.disabled = false; }
     };
     d.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href="#zayavka"]');
@@ -1284,7 +1283,7 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
       var req = FORM_URL ? fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }) : Promise.reject(new Error('no FORM_URL'));
       req.then(function () {
         f.classList.add('is-sent'); say('');
-        var m = f.closest('.modal'); if (m) { m.classList.add('is-sent'); var mc = m.querySelector('.modal__card'), ae = d.activeElement; if (ae && ae !== d.body && ae.blur) ae.blur(); if (mc) { mc.scrollTop = 0; mc.focus({ preventScroll: true }); } if (typeof fit === 'function') fit(); if (typeof closeM === 'function') setTimeout(function () { if (!m.hidden) closeM(); }, 5000); }
+        var m = f.closest('.modal'); if (m) { m.classList.add('is-sent'); var mc = m.querySelector('.modal__card'), ae = d.activeElement; if (ae && ae !== d.body && ae.blur) ae.blur(); if (mc) { mc.scrollTop = 0; mc.focus({ preventScroll: true }); } if (typeof fitM === 'function') setTimeout(function () { if (m.classList.contains('is-sent')) { m.classList.add('is-settled'); fitM(); } }, 450); if (typeof closeM === 'function') setTimeout(function () { if (!m.hidden) closeM(); }, 5000); }
         if (typeof ym === 'function') ym(113738769, 'reachGoal', 'lead_form', { via: data.telegram ? 'telegram' : 'phone' });
       }).catch(function () {
         if (btn) btn.disabled = false;

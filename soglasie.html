@@ -865,18 +865,18 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 .zform__legal{margin-top:-.2rem}
 @media (min-width:561px) and (max-height:960px){.zform .fld__ta{min-height:0;height:5.2em}}
 
-/* ===== v28: плашка про cookie (сразу, низкая полоска внизу) ===== */
-.ck{position:fixed;left:16px;bottom:16px;z-index:50;max-width:min(560px,calc(100vw - 32px));display:flex;align-items:center;gap:14px;padding:10px 10px 10px 18px;border-radius:var(--radius);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line-strong));background:radial-gradient(120% 140% at 100% 0%,color-mix(in srgb,var(--accent-2) 22%,transparent),transparent 60%),color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 14px 40px rgba(0,0,0,.45);opacity:0;translate:0 14px;transition:opacity 300ms ease,translate 420ms var(--ease-drawer),bottom 300ms ease}
-.ck.is-on{opacity:1;translate:0 0}
-.ck__t{flex:1;min-width:0;margin:0;font-size:.84rem;line-height:1.4;color:var(--ink-soft);max-width:none}
+/* ===== v29: плашка про cookie (сразу, маленькая, по центру внизу) ===== */
+.ck{position:fixed;left:50%;bottom:16px;z-index:50;width:max-content;max-width:calc(100vw - 24px);display:flex;align-items:center;gap:10px;padding:6px 6px 6px 16px;border-radius:999px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line-strong));background:color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(0,0,0,.45);opacity:0;translate:-50% 12px;transition:opacity 300ms ease,translate 420ms var(--ease-drawer),bottom 300ms ease}
+.ck.is-on{opacity:1;translate:-50% 0}
+.ck__t{min-width:0;margin:0;font-size:.8rem;line-height:1.3;color:var(--ink-soft);max-width:none}
 .ck__t a{color:var(--ink);border-bottom:1px solid var(--line-strong);white-space:nowrap}
-.ck__ok{--h:38px;flex:none;font-size:.86rem;padding:0 1.25em}
-.ck__x{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);display:grid;place-items:center;cursor:pointer}
-.ck__x svg{width:12px;height:12px}
+.ck__ok{--h:32px;flex:none;font-size:.8rem;padding:0 1.1em}
+.ck__x{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.ck__x svg{width:10px;height:10px}
 body.modal-on .ck,.menu.on~.ck{display:none}
-@media (max-width:860px){.ck{left:12px;right:12px;max-width:none;gap:10px;padding:8px 8px 8px 14px;bottom:calc(12px + env(safe-area-inset-bottom))}
+@media (max-width:860px){.ck{gap:8px;padding:5px 5px 5px 14px;bottom:calc(12px + env(safe-area-inset-bottom))}
   .mbar.is-on~.ck{bottom:calc(76px + env(safe-area-inset-bottom) + 10px)}
-  .ck__t{font-size:.8rem;line-height:1.35}.ck__more{display:none}.ck__ok{--h:36px;padding:0 1.1em}}
+  .ck__t{font-size:.78rem}.ck__ok{padding:0 1em}}
 @media (prefers-reduced-motion:reduce){.ck{transition:none}}
 /* внутренние страницы */
 .page{padding-top:calc(var(--sec-pad) + 64px)}
@@ -1171,7 +1171,7 @@ var FORM_URL = 'https://functions.yandexcloud.net/d4ec2fcqd284ucferl8n';
     if (get('localStorage', KEY)) return;
     var el = document.createElement('div');
     el.className = 'ck'; el.setAttribute('role', 'region'); el.setAttribute('aria-label', 'Файлы cookie');
-    el.innerHTML = '<p class="ck__t">Мы используем cookie и Яндекс Метрику<span class="ck__more">, чтобы делать сайт удобнее</span>. <a href="privacy.html#cookie">Подробнее</a></p>' +
+    el.innerHTML = '<p class="ck__t">Мы используем cookie. <a href="privacy.html#cookie">Подробнее</a></p>' +
       '<button class="btn btn--primary ck__ok" type="button">Принять</button>' +
       '<button class="ck__x" type="button" aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>';
     document.body.appendChild(el);

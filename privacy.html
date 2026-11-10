@@ -859,6 +859,13 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
 .modal__bg{position:fixed}
 .modal__card{max-height:calc(var(--vvh,100dvh) - 32px)}
 @media (max-width:560px){.modal__card{max-height:calc(var(--vvh,100dvh) - 24px)}.modal.is-sent{align-items:center;padding:16px}.modal.is-sent .modal__card{max-height:calc(var(--vvh,100dvh) - 32px);border-radius:calc(var(--radius) + 6px);padding:34px 22px 26px}.modal.is-sent .picker__done-t{padding-right:40px}}
+
+/* ===== v25: галочка согласия, строка про cookie в подвале ===== */
+.zform .consent{margin-top:.1rem}
+.zform__legal{margin-top:-.2rem}
+.ftr__cookie{font-size:.78rem;line-height:1.5;color:var(--ink-mute);margin-top:1rem;max-width:none}
+.ftr__cookie a{color:inherit;border-bottom:1px solid var(--line-strong)}
+@media (min-width:561px) and (max-height:960px){.zform .fld__ta{min-height:0;height:5.2em}}
 /* внутренние страницы */
 .page{padding-top:calc(var(--sec-pad) + 64px)}
 .prose{max-width:74ch;display:grid;gap:1rem;color:var(--ink-soft);line-height:1.65;font-size:1rem;overflow-wrap:anywhere}
@@ -910,18 +917,20 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
     <div class="wrap">
       <div class="sec__head"><span class="chip">Документ</span><h1 class="h2 h2--long">Политика <em class="hl">конфиден&shy;циальности</em></h1><p class="lead">Как мы обрабатываем данные, которые вы оставляете на сайте tework.ru.</p></div>
       <div class="prose">
-        <p>Редакция от 7 ноября 2026 года. Оператор персональных данных: Демченко Владислав Игоревич, ИНН 772270170459, г. Москва, почта для обращений: <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a> (далее «Оператор»).</p>
+        <p>Редакция от 10 ноября 2026 года. Оператор персональных данных: Демченко Владислав Игоревич, ИНН 772270170459, г. Москва, почта для обращений: <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a> (далее «Оператор»).</p>
 
         <h2>1. Общие положения</h2>
         <p>Политика составлена в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных» и действует в отношении всех данных, которые Оператор получает от посетителей сайта https://tework.ru/ (далее «Сайт»).</p>
-        <p>Используя Сайт и отправляя заявку, вы соглашаетесь с этой Политикой. Если вы не согласны, не отправляйте данные через формы Сайта.</p>
+        <p>Согласие на обработку данных из формы заявки вы даёте отдельно: отмечаете галочку в форме перед отправкой. Текст согласия: <a href="soglasie.html">https://tework.ru/soglasie.html</a>. Без галочки заявка не отправляется.</p>
 
         <h2>2. Какие данные мы собираем</h2>
         <ul>
-          <li>Данные из формы заявки: имя, способ связи, контакт в мессенджере, номер телефона (по желанию), текст заявки, дата и место мероприятия.</li>
-          <li>Технические данные, которые передаёт браузер: IP-адрес, тип устройства и браузера, страницы, которые вы открыли, источник перехода и utm-метки, файлы cookie.</li>
-          <li>Данные сервиса «Яндекс Метрика» (в том числе запись действий на страницах, Вебвизор), обезличенные для Оператора.</li>
+          <li>Данные из формы заявки: имя, номер телефона, адрес электронной почты, имя пользователя в Telegram, текст заявки (что вы сами напишете о мероприятии).</li>
+          <li>Служебные данные заявки: дата и время отправки, отметка о согласии, адрес страницы, с которой отправлена заявка, с метками рекламных переходов.</li>
+          <li>Технические данные, которые передаёт браузер: IP-адрес, тип устройства и браузера, страницы, которые вы открыли, источник перехода, файлы cookie.</li>
+          <li>Данные сервиса «Яндекс Метрика», в том числе запись действий на страницах (Вебвизор): движения мыши, прокрутка, нажатия. То, что вы вводите в поля заявки, Вебвизор не записывает.</li>
         </ul>
+        <p>Телефон, почта и Telegram не обязательны все сразу: достаточно имени и одного способа связи.</p>
 
         <h2>3. Зачем нам эти данные</h2>
         <ul>
@@ -931,22 +940,28 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
         </ul>
 
         <h2>4. Правовые основания</h2>
-        <p>Согласие на обработку персональных данных, которое вы даёте, отмечая галочку в форме заявки; исполнение договора, стороной которого вы являетесь; законный интерес Оператора в работе и развитии Сайта.</p>
+        <ul>
+          <li>Ваше согласие на обработку персональных данных (пункт 1 части 1 статьи 6 закона № 152-ФЗ).</li>
+          <li>Заключение и исполнение договора по вашей инициативе (пункт 5 части 1 статьи 6).</li>
+          <li>Законный интерес Оператора в работе и развитии Сайта, если при этом не нарушаются ваши права (пункт 7 части 1 статьи 6).</li>
+        </ul>
 
-        <h2>5. Кому передаём данные</h2>
-        <p>Данные заявки хранятся в таблице Google Sheets Оператора и дублируются в закрытый чат Оператора в Telegram. Статистику посещений обрабатывает ООО «Яндекс» (сервис «Яндекс Метрика»). Другим лицам данные не передаются, кроме случаев, предусмотренных законом.</p>
+        <h2>5. Где хранятся данные и кому передаются</h2>
+        <p>Данные заявки записываются в таблицу Google Sheets Оператора (сервис Google LLC, США) и дублируются в закрытый чат Оператора в мессенджере Telegram, чтобы Оператор быстро увидел заявку и ответил. Это трансграничная передача персональных данных, в том числе в США.</p>
+        <p>Статистику посещений обрабатывает ООО «Яндекс» (сервис «Яндекс Метрика»). Другим лицам данные не передаются, кроме случаев, предусмотренных законом. Данные не продаются и не используются для рассылок.</p>
 
         <h2>6. Сроки хранения</h2>
-        <p>Данные заявки храним 3 года с момента получения или до отзыва согласия. Технические данные хранятся в сроки, установленные сервисом «Яндекс Метрика».</p>
+        <p>Данные заявки храним 3 года с момента получения или до отзыва согласия, после чего удаляем. Технические данные хранятся в сроки, установленные сервисом «Яндекс Метрика».</p>
 
         <h2>7. Ваши права</h2>
-        <p>Вы можете запросить сведения об обработке ваших данных, потребовать их уточнения, блокирования или удаления, а также отозвать согласие. Для этого напишите на <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a>. Ответим в течение 10 рабочих дней.</p>
+        <p>Вы можете запросить сведения об обработке ваших данных, потребовать их уточнения, блокирования или удаления, а также отозвать согласие. Для этого напишите на <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a>. Ответим в течение 10 рабочих дней. Если вы считаете, что ваши права нарушены, вы можете обратиться в Роскомнадзор или в суд.</p>
 
-        <h2>8. Cookie и Метрика</h2>
-        <p>Сайт использует файлы cookie и счётчик «Яндекс Метрика». Вы можете отключить cookie в настройках браузера или заблокировать счётчик: тогда часть функций Сайта может работать иначе.</p>
+        <h2 id="cookie">8. Cookie и Метрика</h2>
+        <p>Сайт использует файлы cookie и счётчик «Яндекс Метрика» с Вебвизором. Они нужны, чтобы считать посещения, видеть, какие разделы читают, и находить неудобные места на страницах. Оставаясь на Сайте, вы соглашаетесь с этим.</p>
+        <p>Если вы не хотите, чтобы эти данные собирались, отключите cookie в настройках браузера или установите <a href="https://yandex.ru/support/metrica/general/opt-out.html" target="_blank" rel="noopener">блокировщик Яндекс Метрики</a>. Сайт при этом продолжит работать.</p>
 
         <h2>9. Безопасность</h2>
-        <p>Доступ к данным заявок есть только у сотрудников Оператора, которые отвечают на обращения. Сайт работает по протоколу HTTPS.</p>
+        <p>Доступ к данным заявок есть только у Оператора и у тех, кто по его поручению отвечает на обращения. Сайт работает по протоколу HTTPS. Если произойдёт утечка данных, Оператор сообщит о ней в Роскомнадзор в сроки, установленные законом.</p>
 
         <h2>10. Изменения</h2>
         <p>Оператор может обновлять Политику. Действующая редакция всегда размещена на странице https://tework.ru/privacy.html.</p>
@@ -964,7 +979,8 @@ html[data-direction] .picker--modal{background:none;border:0;padding:0;display:g
     <nav class="ftr__nav" aria-label="Разделы внизу"><a href="index.html#pochemu">Почему TeWork</a><a href="index.html#proekty">Проекты</a><a href="index.html#kak">Как работаем</a><a href="index.html#personal">Роли и ставки</a><a href="index.html#otzyvy">Отзывы</a><a href="index.html#o-nas">О нас</a><a href="index.html#kontakty">Контакты</a></nav>
     <div class="ftr__ct"><a class="ftr__tel nums" href="tel:+79166188554">+7 916 618-85-54</a><p><a href="https://t.me/+79166188554" target="_blank" rel="noopener">Telegram</a><a href="https://wa.me/79166188554" target="_blank" rel="noopener">WhatsApp</a><a href="https://t.me/TeWork_Agency" target="_blank" rel="noopener">Канал</a></p><p class="ftr__mail">Партнёрства и предложения: <a href="mailto:vladislav.demchenko@tework.ru">vladislav.demchenko@tework.ru</a></p></div>
   </div>
-  <div class="wrap ftr__row"><span>Афонин Андрей Аркадьевич, плательщик налога на профессиональный доход, ИНН 770171355960</span><span><a class="ftr__pol" href="privacy.html">Политика конфиденциальности</a></span><span>© TeWork Agency, 2023–2026</span></div>
+  <div class="wrap ftr__row"><span>Афонин Андрей Аркадьевич, плательщик налога на профессиональный доход, ИНН 770171355960</span><span><a class="ftr__pol" href="privacy.html">Политика конфиденциальности</a> · <a class="ftr__pol" href="soglasie.html">Согласие на обработку данных</a></span><span>© TeWork Agency, 2023–2026</span></div>
+  <div class="wrap"><p class="ftr__cookie">Сайт использует файлы cookie и сервис «Яндекс Метрика» с записью действий на страницах, чтобы считать посещения и улучшать сайт. Оставаясь на сайте, вы соглашаетесь с этим. Подробнее: <a href="privacy.html#cookie">политика конфиденциальности</a>.</p></div>
   <div class="ftr__word" aria-hidden="true">TEWORK</div>
 </footer>
 
@@ -1071,10 +1087,10 @@ var FORM_URL = 'https://script.google.com/macros/s/AKfycbyxacFZ5Ao-G7gc4OsiIbfwp
       else if (!get('phone') && !get('telegram')) { bad = phone; why = 'Оставьте телефон или ник в Telegram, чтобы мы могли ответить.'; }
       else if (!f.checkValidity()) {
         bad = f.querySelector(':invalid');
-        why = bad && bad.name === 'email' ? 'Проверьте адрес почты.' : 'Проверьте поля формы.';
+        why = bad && bad.name === 'agree' ? 'Отметьте согласие на обработку данных.' : bad && bad.name === 'email' ? 'Проверьте адрес почты.' : 'Проверьте поля формы.';
       }
       if (why) { say(why, true); if (bad) bad.focus(); return; }
-      var data = { name: get('name'), phone: get('phone'), email: get('email'), telegram: get('telegram'), msg: get('msg'), source: 'форма', page: location.href };
+      var data = { name: get('name'), phone: get('phone'), email: get('email'), telegram: get('telegram'), msg: get('msg'), source: 'форма', page: location.href, consent: 'галочка на сайте, ' + new Date().toISOString() };
       var btn = f.querySelector('[type=submit]'); if (btn) btn.disabled = true;
       say('Отправляем…');
       var req = FORM_URL ? fetch(FORM_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }) : Promise.reject(new Error('no FORM_URL'));

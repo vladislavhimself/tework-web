@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Заявки TeWork</title>
+<style>
+:root{--bg:#0d0f14;--card:#161a22;--line:#262c38;--ink:#eef0f4;--soft:#9aa3b2;--pink:#f7b5c4;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:1500px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+h1{font-size:22px;margin:0}
+.muted{color:var(--soft);font-size:13px}
+button{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--soft)}
+button.primary{background:var(--pink);color:#111;border-color:var(--pink);font-weight:600}
+button.danger{color:var(--red);padding:5px 10px;font-size:13px}
+.login{max-width:420px;margin:12vh auto 0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:grid;gap:12px}
+input{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;width:100%}
+.err{color:var(--red);min-height:1.3em;font-size:14px}
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:1100px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--soft);white-space:nowrap;position:sticky;top:0;background:var(--card)}
+tr:last-child td{border-bottom:0}
+td.nowrap{white-space:nowrap}
+td.msg{min-width:260px;max-width:460px;white-space:pre-wrap;overflow-wrap:anywhere}
+td.page{max-width:220px;overflow-wrap:anywhere;font-size:13px}
+a{color:var(--pink)}
+.empty{padding:28px;text-align:center;color:var(--soft)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <form class="login" id="login" hidden>
+    <h1>Заявки TeWork</h1>
+    <div class="muted">Страница оператора. Заявки хранятся в базе в России и показываются только после ввода пароля.</div>
+    <input type="password" id="key" placeholder="Пароль" autocomplete="current-password" required>
+    <button class="primary" type="submit">Войти</button>
+    <div class="err" id="loginErr"></div>
+  </form>
+
+  <div id="app" hidden>
+    <header>
+      <div>
+        <h1>Заявки с сайта</h1>
+        <div class="muted" id="info"></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button id="refresh" type="button">Обновить</button>
+        <button id="logout" type="button">Выйти</button>
+      </div>
+    </header>
+    <div class="err" id="appErr"></div>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Дата, время (МСК)</th><th>Имя</th><th>Телефон</th><th>Telegram</th><th>E-mail</th><th>О мероприятии</th><th>Источник</th><th>Страница</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden>Заявок пока нет.</div>
+    </div>
+  </div>
+
+</div>
+<script>
+(function () {
+  var API = 'https://functions.yandexcloud.net/d4ec2fcqd284ucferl8n';
+  var d = document, $ = function (id) { return d.getElementById(id); };
+  var key = '';
+  try { key = localStorage.getItem('tework_admin_key') || ''; } catch (e) {}
+
+  function call(body) {
+    body.key = key;
+    return fetch(API, { method: 'POST', body: JSON.stringify(body) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { j.status = r.status; return j; });
+    });
+  }
+  function explain(j) {
+    if (j.error === 'admin off') return 'Пароль ещё не задан в Yandex Cloud (переменная ADMIN_KEY, не короче 12 символов).';
+    if (j.error === 'bad key') return 'Неверный пароль.';
+    return 'Не получилось загрузить заявки. Попробуйте ещё раз.';
+  }
+  function when(iso) {
+    var t = new Date(iso);
+    if (isNaN(t)) return iso || '';
+    return t.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+  function cell(tr, text, cls) { var td = d.createElement('td'); if (cls) td.className = cls; td.textContent = text || ''; tr.appendChild(td); return td; }
+
+  function render(rows) {
+    var tb = $('rows'); tb.textContent = '';
+    rows.forEach(function (r) {
+      var tr = d.createElement('tr');
+      cell(tr, when(r.created_at), 'nowrap');
+      cell(tr, r.name);
+      cell(tr, r.phone, 'nowrap');
+      cell(tr, r.telegram, 'nowrap');
+      cell(tr, r.email, 'nowrap');
+      cell(tr, r.msg, 'msg');
+      cell(tr, r.source);
+      cell(tr, (r.page || '').replace(/^https?:\/\//, ''), 'page');
+      var td = d.createElement('td'), b = d.createElement('button');
+      b.type = 'button'; b.className = 'danger'; b.textContent = 'Удалить';
+      b.addEventListener('click', function () {
+        if (!confirm('Удалить заявку от «' + (r.name || 'без имени') + '» навсегда? Вернуть её будет нельзя.')) return;
+        b.disabled = true;
+        call({ admin: 'delete', id: r.id }).then(function (j) {
+          if (j.ok) load(); else { b.disabled = false; $('appErr').textContent = explain(j); }
+        }).catch(function () { b.disabled = false; $('appErr').textContent = 'Нет связи с сервером.'; });
+      });
+      td.appendChild(b); tr.appendChild(td);
+      tb.appendChild(tr);
+    });
+    $('empty').hidden = rows.length > 0;
+    $('info').textContent = 'Всего: ' + rows.length + '. Данные из базы в Yandex Cloud (Россия). Обновлено ' + when(new Date().toISOString()) + '.';
+  }
+
+  function show(app) { $('login').hidden = app; $('app').hidden = !app; }
+
+  function load(fromLogin) {
+    $('appErr').textContent = '';
+    return call({ admin: 'list' }).then(function (j) {
+      if (j.ok) {
+        try { localStorage.setItem('tework_admin_key', key); } catch (e) {}
+        show(true); render(j.rows || []);
+      } else if (j.status === 403) {
+        try { localStorage.removeItem('tework_admin_key'); } catch (e) {}
+        show(false); $('loginErr').textContent = fromLogin || key ? explain(j) : '';
+        key = '';
+      } else {
+        if ($('app').hidden) { show(false); $('loginErr').textContent = explain(j); } else $('appErr').textContent = explain(j);
+      }
+    }).catch(function () {
+      if ($('app').hidden) { show(false); $('loginErr').textContent = 'Нет связи с сервером.'; } else $('appErr').textContent = 'Нет связи с сервером.';
+    });
+  }
+
+  $('login').addEventListener('submit', function (e) {
+    e.preventDefault(); key = $('key').value; $('loginErr').textContent = 'Проверяем…'; load(true);
+  });
+  $('refresh').addEventListener('click', function () { load(); });
+  $('logout').addEventListener('click', function () {
+    key = ''; try { localStorage.removeItem('tework_admin_key'); } catch (e) {}
+    $('key').value = ''; $('loginErr').textContent = ''; show(false);
+  });
+
+  if (key) load(); else show(false);
+})();
+</script>
+</body>
+</html>
